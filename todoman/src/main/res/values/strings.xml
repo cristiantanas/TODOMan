@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">TODOMan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="taskNew">Agregar nueva tarea</string>
+    <string name="contentTitle">Detalles de la tarea</string>
+    <string name="taskName">Nombre de la tarea</string>
+    <string name="taskDescription">Descripción</string>
+    <string name="taskDateAndTime">¿Cuándo vence?</string>
+    <string name="taskChangeDate">Cambiar</string>
+    <string name="taskCompleted">¿Completada?</string>
+    <string name="taskSave">Guardar</string>
+    <string name="taskClear">Limpiar</string>
+    <string name="taskCancel">Cancelar</string>
 </resources>
