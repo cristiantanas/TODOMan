@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.uab.dedam.todoman.NewTodoFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="24sp"
+        android:id="@+id/textTitle"
+        android:layout_weight="1"
+        android:hint="@string/texthintTodoTitle" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="18sp"
+        android:layout_weight="6"
+        android:id="@+id/textDescription"
+        android:hint="@string/texthintDescription" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/textDueDate"
+        android:textSize="18sp"
+        android:hint="@string/texthintDueDate"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <CheckBox
+        android:text="@string/textTodoDone"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textSize="18sp"
+        android:id="@+id/checkDone"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <Button
+            android:text="@string/btntextSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSave"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="@string/btntextClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnClear"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="@string/btntextCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCancel"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

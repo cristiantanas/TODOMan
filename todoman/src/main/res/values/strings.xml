@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">TODOMan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btnlabelAddNewTodo">+</string>
+    <string name="texthintTodoTitle">ToDo Title</string>
+    <string name="textTodoDone">DONE</string>
+    <string name="texthintDescription">Description</string>
+    <string name="texthintDueDate">Click to set due date</string>
+    <string name="btntextSave">Save</string>
+    <string name="btntextClear">Clear</string>
+    <string name="btntextCancel">Cancel</string>
 </resources>

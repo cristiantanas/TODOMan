@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.uab.dedam.todoman.TodoListFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ListView
+        android:id="@+id/listTodoList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"/>
+
+    <Button
+        android:text="@string/btnlabelAddNewTodo"
+        android:layout_width="wrap_content"
+        android:id="@+id/buttonNewTodo"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"/>
+</LinearLayout>
