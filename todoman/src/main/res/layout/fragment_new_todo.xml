@@ -3,9 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="org.uab.dedam.todoman.NewTodoFragment">
+    android:id="@+id/fragmentNewTodo"
+    tools:context="org.uab.dedam.todoman.NewTodoFragment"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    android:padding="8dp">
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textSize="24sp"
@@ -13,13 +19,15 @@
         android:layout_weight="1"
         android:hint="@string/texthintTodoTitle" />
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textSize="18sp"
         android:layout_weight="6"
         android:id="@+id/textDescription"
-        android:hint="@string/texthintDescription" />
+        android:hint="@string/texthintDescription"
+        android:singleLine="false"
+        android:gravity="top|left" />
 
     <TextView
         android:layout_width="match_parent"

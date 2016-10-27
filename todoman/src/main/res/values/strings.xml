@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="btnlabelAddNewTodo">+</string>
+    <string name="btnlabelAddNewTodo">NEW TODO</string>
     <string name="texthintTodoTitle">ToDo Title</string>
     <string name="textTodoDone">DONE</string>
     <string name="texthintDescription">Description</string>
@@ -11,4 +11,5 @@
     <string name="btntextSave">Save</string>
     <string name="btntextClear">Clear</string>
     <string name="btntextCancel">Cancel</string>
+    <string name="toastTodoSaved">Todo saved.</string>
 </resources>
