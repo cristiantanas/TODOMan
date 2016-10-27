@@ -7,22 +7,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements MainFragment.MainFragmentIterationListener, ContentFragment.ContentFragmentIterationListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Button btn_taskNew = (Button) findViewById(R.id.btn_taskNew);
-        btn_taskNew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                        Intent intent=
-                                new Intent(HomeActivity.this, ContentActivity.class);
-                startActivity(intent);
-            }
-        });
+
+    }
+
+    @Override
+    public void onMainFragmentIteration(Bundle parameters) {
+
+    }
+
+    @Override
+    public void onContentFragmentIteration(Bundle parameters) {
+
     }
 }
 
