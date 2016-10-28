@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.uab.dedam.todoman.TaskFragment"
+    android:id="@+id/fragmentTask">
+
+    <TextView
+        android:text="@string/add_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:id="@+id/textView" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/title"
+        android:hint="@string/title"
+        android:layout_weight="1"
+        android:maxLines="1" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/description"
+        android:layout_weight="1"
+        android:hint="@string/description" />
+
+    <Switch
+        android:text="@string/done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_weight="1"
+        android:id="@+id/taskComplete" />
+
+
+
+    <TextView
+        android:text="@string/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_weight="5"
+        android:id="@+id/taskEndDate" />
+
+    <Button
+        android:text="@string/set_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/taskSetDate" />
+
+
+
+    <Button
+        android:text="@string/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gotoHomeActivity"
+        android:layout_weight="1"
+        tools:ignore="RelativeOverlap" />
+
+    <Button
+        android:text="@string/clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/button2" />
+
+    <Button
+        android:text="@string/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/saveTask" />
+</LinearLayout>

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">TODOMan</string>
+    <string name="add_activity">ADD ACTIVITY</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="done">Done</string>
+    <string name="save">SAVE</string>
+    <string name="clear">CLEAR</string>
+    <string name="cancel">CANCEL</string>
+    <string name="add">ADD</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="set_date">SET DATE</string>
+    <string name="date">DATE</string>
+    <string name="textview">TextView</string>
+    <string name="completed">completed</string>
+    <string name="description2">description2</string>
 </resources>
