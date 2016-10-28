@@ -37,7 +37,7 @@ public class HomeActivity extends FragmentActivity {
             public void onClick(View v){
                 Intent intent = new Intent(HomeActivity.this , TaskFormActivity.class);
                 startActivity(intent);
-                finish();
+                
 
             }
         });
