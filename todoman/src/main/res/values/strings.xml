@@ -6,4 +6,11 @@
     <string name="clearLabel">Clear</string>
     <string name="cancelLabel">Cancel</string>
     <string name="newTaskLabel">New task</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="completedLabel">Completed?</string>
+    <string name="dateSelectedLabel">Date selected</string>
+    <string name="setDateLabel">Set date</string>
+    <string name="taskListLabel">Task list</string>
 </resources>
