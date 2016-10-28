@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TODOMan</string>
+    <string name="hintTodoTitle">ToDo title</string>
+    <string name="hintDescription">Description</string>
+    <string name="hintDueDate">Click to set due date</string>
+    <string name="textDone">Done</string>
+    <string name="textSave">Save</string>
+    <string name="textClear">Clear</string>
+    <string name="textCancel">Cancel</string>
+    <string name="textNewTodo">New ToDo</string>
 </resources>
