@@ -6,20 +6,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements HomeFragment.OnNextButtonCallback{
+
+    private boolean tablet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Button gotoSubactivity = (Button) findViewById(R.id.newTask);
-        gotoSubactivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, NewTaskActivity.class);
-                startActivity(intent);
-            }
-        });
+        //tablet o smartphone
+        if (findViewById(R.id.fragment_task) != null) {
+            tablet = true;
+            //Toast.makeText(getApplicationContext(), "Tablet", Toast.LENGTH_SHORT).show();
+        } else {
+            //Toast.makeText(getApplicationContext(), "Mobile", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onNextPressed() {
+        if (!tablet) {
+            Intent intent = new Intent(HomeActivity.this, NewTaskActivity.class);
+            startActivity(intent);
+        } else {
+           /* FragmentManager fragmentManager=getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            TaskFragment formFragment =new TaskFragment();
+            fragmentTransaction.add(R.id.fragment_task,formFragment);
+            fragmentTransaction.commit();*/
+        }
     }
 }
