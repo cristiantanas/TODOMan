@@ -21,7 +21,7 @@ public class FirstFragment extends Fragment {
 
     Activity activity;
 
-
+    boolean tablet;
 
     public FirstFragment() {
         // Required empty public constructor
@@ -32,13 +32,21 @@ public class FirstFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+
+        tablet = getResources().getBoolean(R.bool.Tablet);
+
         Button button = (Button) activity.findViewById(R.id.TaskButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(), FormActivity.class);
-                startActivity(intent);
+                if (!tablet) {
+
+                    Intent intent = new Intent(getActivity(), FormActivity.class);
+                    startActivity(intent);
+                }
+
+
 
             }
         });
