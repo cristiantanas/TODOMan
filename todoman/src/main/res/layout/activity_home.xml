@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<fragment class="org.uab.dedam.todoman.MainFragment"
+<fragment
+    class="org.uab.dedam.todoman.MainFragment"
               android:id="@+id/MainFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></fragment>
-
+        android:layout_height="match_parent" />
     </LinearLayout>

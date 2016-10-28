@@ -8,20 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class MainFragment extends Fragment {
-	public static final String TAG = "MainFragment";
-	private MainFragmentIterationListener mCallback = null;
+	// TODO Crear variables para todos los elementos del layout
+		private MainFragmentIterationListener mCallback = null;
 	public interface MainFragmentIterationListener{
 		public void onMainFragmentIteration(Bundle parameters);
-	}
-
-	public static MainFragment newInstance(Bundle arguments){
-		MainFragment f = new MainFragment();
-		if(arguments != null){
-			f.setArguments(arguments);
-		}
-		return f;
 	}
 
 	public MainFragment() {
@@ -31,11 +24,8 @@ public class MainFragment extends Fragment {
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
-		try{
-			mCallback = (MainFragmentIterationListener) context;
-		}catch(CastClassException ex){
-			Log.e("MainFragment", "El Activity debe implementar la interfaz MainFragmentIterationListener");
-		}
+		mCallback = (MainFragmentIterationListener) context;
+		// TODO Solucionar catch exception.
 	}
 
 	@Override
@@ -46,10 +36,10 @@ public class MainFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		super.onCreateView(inflater, container, savedInstanceState);
-		View v =  inflater.inflate(R.layout.fragment_main, container, false);
-		if(v != null){
-			Button btn_taskNew = (Button) findViewById(R.id.btn_taskNew);
+		// super.onCreateView(inflater, container, savedInstanceState);
+		View view =  inflater.inflate(R.layout.fragment_main, container, false);
+				if(view != null){
+			Button btn_taskNew=(Button)view.findViewById(R.id.btn_taskNew);
 			btn_taskNew.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -60,17 +50,12 @@ public class MainFragment extends Fragment {
 			});
 
 		}
-		return v;
+		return view;
 	}
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		listView.setAdapter(new MyListAdapter);
-		textView.setText("Hola mundo");
-		if(savedInstanceState !=null){
-			textView.setText(savedInstanceState.getString("helloWorld");
-		}
 	}
 
 	@Override

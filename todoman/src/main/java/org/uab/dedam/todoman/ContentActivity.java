@@ -9,10 +9,16 @@ public class ContentActivity extends AppCompatActivity implements ContentFragmen
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_content);
-	}
+		Bundle parameters = getIntent().getExtras();
+		String action=parameters.getString("action");
+		ContentFragment content = (ContentFragment)
+getSupportFragmentManager().findFragmentById(R.id.ContentFragment);
+
+		}
 
 	@Override
 	public void onContentFragmentIteration(Bundle parameters) {
-
+// TODO Implementar interacción entre fragment de contenido y activity home
 	}
+
 }

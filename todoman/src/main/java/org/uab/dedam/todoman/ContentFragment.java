@@ -5,37 +5,30 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 public class ContentFragment extends Fragment {
-	public static final String TAG = "ContentFragment";
-	private ContentFragmentIterationListener mCallback = null;
+	// TODO Crear variables para todos los elementos del layout
+		private ContentFragmentIterationListener mCallback = null;
+	private String action;
+
 	public interface ContentFragmentIterationListener{
 		public void onContentFragmentIteration(Bundle parameters);
 	}
 
-	public static ContentFragment newInstance(Bundle arguments){
-		ContentFragment f = new ContentFragment();
-		if(arguments != null){
-			f.setArguments(arguments);
-		}
-		return f;
-	}
-	public ContentFragment() {
+			public ContentFragment() {
 
 	}
 
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
-		try{
-			mCallback = (ContentFragmentIterationListener) context;
-		}catch(CastClassException ex){
-			Log.e("ContentFragment", "El Activity debe implementar la interfaz ContentFragmentIterationListener");
-		}
+		mCallback = (ContentFragmentIterationListener) context;
+		// TODO Solucionar catch exception.
 	}
 
 	@Override
@@ -46,21 +39,17 @@ public class ContentFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		super.onCreateView(inflater, container, savedInstanceState);
-		View v =  inflater.inflate(R.layout.fragment_Content, container, false);
-		if(v != null) {
-
+		// super.onCreateView(inflater, container, savedInstanceState);
+		View view =  inflater.inflate(R.layout.fragment_content, container, false);
+		if(view != null) {
+// TODO Implementar listeners para los botones y otros elementos del fragment.
 		}
-		return v;
+		return view;
 		}
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		textView.setText("Hola mundo");
-		if(savedInstanceState !=null){
-			textView.setText(savedInstanceState.getString("helloWorld");
-		}
 	}
 
 	@Override
@@ -81,4 +70,14 @@ public class ContentFragment extends Fragment {
 
 			}
 
+			public void doAction(String action){
+switch (action){
+			case "new_task":
+// TODO Implementar acción de borrado de campos y cambio de título de ventana
+				break;
+			// TODO Implementar resto de acciones del fragment.
+		}
+	
+			}
+			
 }

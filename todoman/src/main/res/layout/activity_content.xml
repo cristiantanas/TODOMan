@@ -11,6 +11,6 @@
         class="org.uab.dedam.todoman.ContentFragment"
         android:id="@+id/ContentFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></fragment>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
