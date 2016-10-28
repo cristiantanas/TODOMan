@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.uab.dedam.todoman.AddUpdateFragment">
+
+
+    <TextView
+        android:text="@string/taskTitleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:id="@+id/labelTaskTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:text="@string/taskDescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelTaskTitle"
+        android:layout_alignLeft="@+id/labelTaskTitle"
+        android:layout_alignStart="@+id/labelTaskTitle"
+        android:layout_marginTop="19dp"
+        android:id="@+id/labelTaskDescription" />
+
+    <TextView
+        android:text="@string/taskDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelTaskDescription"
+        android:layout_alignLeft="@+id/labelTaskDescription"
+        android:layout_alignStart="@+id/labelTaskDescription"
+        android:layout_marginTop="26dp"
+        android:id="@+id/labelTaskDone" />
+
+    <TextView
+        android:text="@string/taskDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelTaskDone"
+        android:layout_alignLeft="@+id/labelTaskDone"
+        android:layout_alignStart="@+id/labelTaskDone"
+        android:layout_marginTop="29dp"
+        android:id="@+id/labelTaskDueDate" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/txtTaskTitle"
+        android:layout_alignBaseline="@+id/labelTaskTitle"
+        android:layout_alignBottom="@+id/labelTaskTitle"
+        android:layout_toRightOf="@+id/labelTaskDescription"
+        android:layout_toEndOf="@+id/labelTaskDescription"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/txtTaskDueDate"
+        android:text=""
+        android:layout_alignBaseline="@+id/labelTaskDueDate"
+        android:layout_alignBottom="@+id/labelTaskDueDate"
+        android:layout_alignLeft="@+id/txtTaskTitle"
+        android:layout_alignStart="@+id/txtTaskTitle"
+        android:layout_alignRight="@+id/txtTaskDescription"
+        android:layout_alignEnd="@+id/txtTaskDescription" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/txtTaskTitle"
+        android:layout_alignLeft="@+id/txtTaskTitle"
+        android:layout_alignStart="@+id/txtTaskTitle"
+        android:id="@+id/txtTaskDescription" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switchTaskDone"
+        android:layout_alignTop="@+id/labelTaskDone"
+        android:layout_alignLeft="@+id/txtTaskDescription"
+        android:layout_alignStart="@+id/txtTaskDescription" />
+
+    <Button
+        android:text="Set Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSetDate"
+        android:layout_marginRight="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_below="@+id/switchTaskDone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="@string/saveLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/labelTaskDueDate"
+        android:layout_alignStart="@+id/labelTaskDueDate"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="14dp"
+        android:id="@+id/btnSave" />
+
+    <Button
+        android:text="@string/clearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnSave"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnClear" />
+
+    <Button
+        android:text="@string/cancelLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnClear"
+        android:layout_alignRight="@+id/btnSetDate"
+        android:layout_alignEnd="@+id/btnSetDate"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/btnCancel" />
+
+</RelativeLayout>
