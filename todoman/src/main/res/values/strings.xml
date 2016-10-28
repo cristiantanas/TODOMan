@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">TODOMan</string>
-    <string name="taskTitleLabel">Task title</string>
-    <string name="taskDescriptionLabel">Task description</string>
+    <string name="taskTitleLabel">Title</string>
+    <string name="taskDescriptionLabel">Description</string>
     <string name="saveLabel">Save</string>
     <string name="clearLabel">Clear</string>
     <string name="cancelLabel">Cancel</string>
     <string name="newTaskLabel">New task</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="taskDone">Done</string>
+    <string name="taskDueDate">Due Date</string>
 </resources>
