@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">TODOMan</string>
-    <string name="taskTitleLabel">Task title</string>
-    <string name="taskDescriptionLabel">Task description</string>
-    <string name="saveLabel">Save</string>
-    <string name="clearLabel">Clear</string>
-    <string name="cancelLabel">Cancel</string>
-    <string name="newTaskLabel">New task</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_title">HOME SWEET HOME</string>
+    <string name="home_button">Next</string>
+    <string name="label_title">Title</string>
+    <string name="label_description">Description</string>
+    <string name="done">Done (if checked)</string>
+    <string name="endDate">Ending Date</string>
+    <string name="set">set</string>
+    <string name="save">save</string>
+    <string name="clear">clear</string>
+    <string name="cancel">cancel</string>
 </resources>
