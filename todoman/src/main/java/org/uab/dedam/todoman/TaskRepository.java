@@ -15,13 +15,13 @@ public class TaskRepository {
 
     public TaskRepository(Context context){
         this.taskDBOpenHelper = new TaskDBOpenHelper(context);
-        //this.dbObj = this.taskDBOpenHelper.getWritableDatabase();
+        this.dbObj = this.taskDBOpenHelper.getWritableDatabase();
     }
 
     public Cursor getTasks(){
-        this.dbObj = this.taskDBOpenHelper.getReadableDatabase();
+        //this.dbObj = this.taskDBOpenHelper.getReadableDatabase();
         Cursor tasks = this.dbObj.query(TaskDBContract.TABLE_TASKS,null,null,null,null,null,null);
-        dbObj.close();
+        //dbObj.close();
         return tasks;
     }
 

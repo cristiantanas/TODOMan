@@ -9,7 +9,7 @@ public class TaskDBContract {
 
     public static String TABLE_TASKS = "tasks";
 
-    public static String COLUMN_ID = "_ID";
+    public static String COLUMN_ID = "_id";
     public static String COLUMN_TITLE = "title";
     public static String COLUMN_DESCRIPTION = "description";
     public static String COLUMN_DUEDATE = "duedate";
