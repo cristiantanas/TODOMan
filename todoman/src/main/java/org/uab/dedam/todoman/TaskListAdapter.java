@@ -2,6 +2,7 @@ package org.uab.dedam.todoman;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +27,29 @@ public class TaskListAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+        int pos = cursor.getPosition();
+
+        if((pos & 0x01) == 0) {
+            view.setBackgroundColor(Color.rgb(255, 255, 255));
+        }else{
+            view.setBackgroundColor(Color.rgb(200, 200, 255));
+        }
+
         TextView tvTitle = (TextView) view.findViewById(R.id.taskTitle);
         TextView tvDueDate = (TextView) view.findViewById(R.id.taskDueDate);
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         String duedate = cursor.getString(cursor.getColumnIndexOrThrow("duedate"));
         tvTitle.setText(title);
         tvDueDate.setText(duedate);
+    }
+
+    @Override
+    public void changeCursor(Cursor cursor) {
+        super.changeCursor(cursor);
+    }
+
+    @Override
+    public Cursor swapCursor(Cursor newCursor) {
+        return super.swapCursor(newCursor);
     }
 }

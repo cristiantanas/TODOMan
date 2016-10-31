@@ -1,7 +1,9 @@
 package org.uab.dedam.todoman;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,10 +18,22 @@ public class NewTodoActivity extends AppCompatActivity {
     CheckBox checkDone;
     TaskRepository repo;
 
+    boolean openExisting;
+    int todoId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_todo);
+
+        //check if we have received a todoId
+        Intent intent = getIntent();
+        if (intent.hasExtra("todoId")){
+            openExisting = true;
+            todoId = intent.getIntExtra("todoId", -1);
+        }else{
+            openExisting = false;
+        }
 
         editTitle = (EditText) findViewById(R.id.editTodoTitle);
         editDescription = (EditText) findViewById(R.id.editTodoDescription);
@@ -28,14 +42,29 @@ public class NewTodoActivity extends AppCompatActivity {
 
         repo = new TaskRepository(this);
 
+        if(openExisting){
+            Cursor crs = repo.getTaskByID(todoId);
+            editTitle.setText(crs.getString(crs.getColumnIndexOrThrow(TaskDBContract.COLUMN_TITLE)));
+            editDescription.setText(crs.getString(crs.getColumnIndexOrThrow(TaskDBContract.COLUMN_DESCRIPTION)));
+            textDueDate.setText(crs.getString(crs.getColumnIndexOrThrow(TaskDBContract.COLUMN_DUEDATE)));
+            checkDone.setChecked(crs.getInt(crs.getColumnIndexOrThrow(TaskDBContract.COLUMN_DONE)) == 1);
+        }
+
         Button btnSave = (Button) findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                repo.saveTask(editTitle.getText().toString(),
-                        editDescription.getText().toString(),
-                        textDueDate.getText().toString());
-
+                if(openExisting){
+                    repo.updateTask(todoId,
+                            editTitle.getText().toString(),
+                            editDescription.getText().toString(),
+                            textDueDate.getText().toString(),
+                            checkDone.isChecked());
+                }else {
+                    repo.saveTask(editTitle.getText().toString(),
+                            editDescription.getText().toString(),
+                            textDueDate.getText().toString());
+                }
                 finish();
             }
         });
