@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <fragment
+        class="org.uab.dedam.todoman.FragmentListTasks"
+        android:id="@+id/fragment_list_tasks"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="50"
+        tools:layout="@layout/fragment_list_tasks" />
+
+    <fragment
+        class="org.uab.dedam.todoman.FragmentNewTask"
+        android:id="@+id/fragment_new_task"
+        android:layout_weight="50"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_new_task" />
+
+</LinearLayout>

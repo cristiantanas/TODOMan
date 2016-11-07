@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">TODOMan</string>
+    <string name="newTaskLabel">New task</string>
     <string name="taskTitleLabel">Task title</string>
     <string name="taskDescriptionLabel">Task description</string>
+    <string name="set_date">Set date</string>
+    <string name="date">NO DATE</string>
+    <string name="completed">Completed</string>
     <string name="saveLabel">Save</string>
-    <string name="clearLabel">Clear</string>
     <string name="cancelLabel">Cancel</string>
-    <string name="newTaskLabel">New task</string>
+    <string name="clearLabel">Clear</string>
+    <string name="listTasks">TASKS</string>
 </resources>
