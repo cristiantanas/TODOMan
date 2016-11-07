@@ -21,7 +21,12 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.listener = (OnDateSetCallback) activity;
+        try{
+            this.listener = (OnDateSetCallback) activity;
+        }
+        catch(ClassCastException exception) {
+            throw new ClassCastException("The activity does not implement the interface.");
+        }
     }
 
     @Override

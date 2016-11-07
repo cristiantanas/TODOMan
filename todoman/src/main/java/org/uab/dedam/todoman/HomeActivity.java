@@ -24,11 +24,8 @@ public class HomeActivity extends AppCompatActivity implements DatePickerFragmen
             btnNewTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                boolean existsFrgNewTask = (getSupportFragmentManager().findFragmentById(R.id.fragment_new_task) != null);
-                if(!existsFrgNewTask) {
-                    Intent i = new Intent(HomeActivity.this, NewTaskActivity.class);
-                    startActivity(i);
-                }
+                Intent i = new Intent(HomeActivity.this, NewTaskActivity.class);
+                startActivity(i);
                 }
             });
         }

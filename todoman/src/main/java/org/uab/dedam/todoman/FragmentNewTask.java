@@ -1,6 +1,7 @@
 package org.uab.dedam.todoman;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +18,26 @@ public class FragmentNewTask extends Fragment {
 	public View onCreateView(LayoutInflater inflater, 
 			                 ViewGroup container, 
 			                 Bundle savedInstanceState) {
-		
-		View viewLayout = inflater.inflate(R.layout.fragment_new_task, container, false);
+		return inflater.inflate(R.layout.fragment_new_task, container, false);
+	}
 
-		btnSetDate = (Button) viewLayout.findViewById(R.id.btn_set_date);
-		texDate = (TextView) viewLayout.findViewById(R.id.tex_date);
-			btnSetDate.setOnClickListener(new View.OnClickListener() {
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+
+		btnSetDate = (Button) getView().findViewById(R.id.btn_set_date);
+		texDate = (TextView) getView().findViewById(R.id.tex_date);
+		btnSetDate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				((DatePickerFragment.OnDateSetCallback)getActivity()).selectDate();
+				try{
+					((DatePickerFragment.OnDateSetCallback)getActivity()).selectDate();
+				}
+				catch(ClassCastException exception) {
+					throw new ClassCastException("The activity does not implement the interface.");
+				}
 			}
 		});
-		return viewLayout;
 	}
 
 	public void setDate(String date){

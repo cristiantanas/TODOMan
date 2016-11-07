@@ -9,5 +9,5 @@
     <string name="saveLabel">Save</string>
     <string name="cancelLabel">Cancel</string>
     <string name="clearLabel">Clear</string>
-    <string name="listTasks">Lista de tareas</string>
+    <string name="listTasks">TASKS</string>
 </resources>
