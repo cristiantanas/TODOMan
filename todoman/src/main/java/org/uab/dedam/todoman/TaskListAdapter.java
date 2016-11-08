@@ -7,6 +7,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -37,8 +38,15 @@ public class TaskListAdapter extends CursorAdapter {
 
         TextView tvTitle = (TextView) view.findViewById(R.id.taskTitle);
         TextView tvDueDate = (TextView) view.findViewById(R.id.taskDueDate);
+        ImageView imgDone = (ImageView) view.findViewById(R.id.imgDone);
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         String duedate = cursor.getString(cursor.getColumnIndexOrThrow("duedate"));
+        Boolean done = (cursor.getInt(cursor.getColumnIndexOrThrow("done")) == 1);
+        if (done) {
+            imgDone.setVisibility(View.VISIBLE);
+        } else {
+            imgDone.setVisibility(View.INVISIBLE);
+        }
         tvTitle.setText(title);
         tvDueDate.setText(duedate);
     }
