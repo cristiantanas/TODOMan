@@ -8,18 +8,42 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="org.uab.dedam.todoman.NewTaskActivity">
+    tools:context="org.uab.dedam.todoman.views.NewTaskActivity">
+
+    <TextView
+        android:text="@string/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/swc_done"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp"
+        android:id="@+id/tex_date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+    <Button
+        android:text="@string/setTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_set_time"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_alignBaseline="@+id/tex_time"
+        android:layout_alignBottom="@+id/tex_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/btn_save_task"
+        android:layout_alignStart="@+id/btn_save_task" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textAutoCorrect"
-        android:text="@string/taskTitleLabel"
+        android:hint="@string/taskTitleLabel"
         android:ems="10"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/taskTitle"
+        android:id="@+id/tex_title"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -28,39 +52,78 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:layout_below="@+id/taskTitle"
+        android:layout_below="@+id/tex_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="19dp"
-        android:id="@+id/taskDescription"
+        android:id="@+id/tex_description"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:text="@string/taskDescriptionLabel"/>
-
-    <Button
-        android:text="@string/saveLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/saveTask" />
-
-    <Button
-        android:text="@string/clearLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/saveTask"
-        android:layout_toEndOf="@+id/saveTask"
-        android:id="@+id/clearContent" />
+        android:hint="@string/taskDescriptionLabel" />
 
     <Button
         android:text="@string/cancelLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/clearContent"
-        android:layout_toEndOf="@+id/clearContent"
-        android:id="@+id/cancelTask" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/btn_cancel"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+
+    <Button
+        android:text="@string/clearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_clear"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/saveLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_save_task"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Switch
+        android:text="@string/completed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/swc_done"
+        android:switchPadding="@dimen/padding_switch"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+        android:layout_below="@+id/tex_description"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tex_time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/setDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_set_date"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_alignBaseline="@+id/tex_date"
+        android:layout_alignBottom="@+id/tex_date"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/btn_set_time"
+        android:layout_alignStart="@+id/btn_set_time" />
 </RelativeLayout>
