@@ -2,7 +2,6 @@ package org.uab.dedam.todoman.presenter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.view.View;
 
 import org.uab.dedam.todoman.model.ITaskRepository;
 import org.uab.dedam.todoman.model.TaskRepository;
