@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/TaskLinearLay">
+
+    <EditText
+        android:text="Task Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TitleText"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
+
+    <EditText
+        android:text="Task Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DescripText"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
+
+    <CheckBox
+        android:text="Completed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Completed"
+        android:textSize="30sp"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="Save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/SaveButton"
+            android:textSize="24sp"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:text="CLEAR"
+            android:layout_width="141dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ClearButton"
+            android:textSize="24sp"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:text="CANCEL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/CancelButton"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</LinearLayout>
