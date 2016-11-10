@@ -69,7 +69,6 @@
         <View
             android:id="@+id/vieCompleted"
             android:visibility="gone"
-            android:text="@string/date"
             android:layout_width="0dp"
             android:layout_weight="0.025"
             android:background="@color/colorPrimary"
