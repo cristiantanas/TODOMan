@@ -23,6 +23,11 @@ public class TaskRepository {
         return tasks;
     }
 
+    public Cursor getTasksSorted(){
+        Cursor tasks = this.dbObj.query(TaskDBContract.TABLE_TASKS,null,null,null,null,null,TaskDBContract.COLUMN_DUEDATE);
+        return tasks;
+    }
+
     public Cursor getTaskByID(int todoId){
         String[] args = {String.valueOf(todoId)};
         Cursor task = this.dbObj.query(TaskDBContract.TABLE_TASKS,null,"_id=?",args,null,null,null);
@@ -56,9 +61,13 @@ public class TaskRepository {
         dbObj.close();
     }
 
-    public void setTaskDone(Integer id){
+    public void deleteTask(int todoId){
+        this.dbObj.delete(TaskDBContract.TABLE_TASKS, "_id=?", new String[]{String.valueOf(todoId)});
+    }
+
+    public void setTaskDone(int todoId){
         ContentValues values = new ContentValues();
         values.put(TaskDBContract.COLUMN_DONE, 1);
-        this.dbObj.update(TaskDBContract.TABLE_TASKS, values, "_id=?", new String[]{id.toString()});
+        this.dbObj.update(TaskDBContract.TABLE_TASKS, values, "_id=?", new String[]{String.valueOf(todoId)});
     }
 }

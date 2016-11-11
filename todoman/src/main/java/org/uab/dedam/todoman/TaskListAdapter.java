@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Date;
+
 /**
  * Created by Balazs on 10/29/2016.
  */
@@ -23,25 +25,31 @@ public class TaskListAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.task_item,parent,false);
-        //return null;
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         int pos = cursor.getPosition();
 
+        //set background color
         if((pos & 0x01) == 0) {
             view.setBackgroundColor(Color.rgb(255, 255, 255));
         }else{
-            view.setBackgroundColor(Color.rgb(200, 200, 255));
+            view.setBackgroundColor(Color.rgb(240, 240, 240));
         }
 
         TextView tvTitle = (TextView) view.findViewById(R.id.taskTitle);
         TextView tvDueDate = (TextView) view.findViewById(R.id.taskDueDate);
         ImageView imgDone = (ImageView) view.findViewById(R.id.imgDone);
+
+        //store ID in the view TAG
+        view.setTag(cursor.getInt(cursor.getColumnIndexOrThrow("_id")));
+
+        //populate fields
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         String duedate = cursor.getString(cursor.getColumnIndexOrThrow("duedate"));
         Boolean done = (cursor.getInt(cursor.getColumnIndexOrThrow("done")) == 1);
+
         if (done) {
             imgDone.setVisibility(View.VISIBLE);
         } else {

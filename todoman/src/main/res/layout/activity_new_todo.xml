@@ -31,12 +31,21 @@
         android:gravity="top|left" />
 
     <TextView
+        android:text="@string/textDueDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:layout_marginTop="16dp" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/textDueDate"
         android:hint="@string/hintDueDate"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textSize="18sp" />
 
     <CheckBox
         android:text="@string/textDone"

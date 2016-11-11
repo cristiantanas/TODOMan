@@ -8,4 +8,5 @@
     <string name="textClear">Clear</string>
     <string name="textCancel">Cancel</string>
     <string name="textNewTodo">New ToDo</string>
+    <string name="textDueDate">Due date: </string>
 </resources>
