@@ -6,4 +6,12 @@
     <string name="clearLabel">Clear</string>
     <string name="cancelLabel">Cancel</string>
     <string name="newTaskLabel">New task</string>
+    <string name="checkboxTaskCompletedLabel">Completed?</string>
+    <string name="plusLabel">+</string>
+    <string name="dateSelectedLabel">03/07/2016</string>
+    <string name="selectedTimeLabel">23:59</string>
+    <string name="setDateLabel">Set date</string>
+    <string name="setTimeLabel">Set time</string>
+    <string name="endDateLabel">Set end date</string>
+    <string name="endTimeLabel">Set end time</string>
 </resources>

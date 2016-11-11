@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/checkBoxItemTaskCompleted"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:clickable="false"
+        app:buttonTint="@android:color/holo_orange_dark" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:id="@+id/linearLayoutTaskGroupTextView"
+        android:layout_weight="0.78"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewItemTaskTitle"
+            android:text="@string/taskTitleLabel"
+            android:textStyle="normal|bold"
+            android:textSize="18sp"
+            android:layout_width="190dp" />
+
+        <TextView
+            android:text="@string/taskDescriptionLabel"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewItemTaskDescription"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutTaskGroupEndDate"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:text="@string/dateSelectedLabel"
+            android:layout_width="match_parent"
+            android:id="@+id/textViewItemTaskSelectedDate"
+            android:textSize="18sp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="@string/selectedTimeLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewItemTaskSelectedTime"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

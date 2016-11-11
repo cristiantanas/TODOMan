@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_sub"
     android:layout_width="match_parent"
@@ -14,53 +15,112 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textAutoCorrect"
-        android:text="@string/taskTitleLabel"
+        android:hint="@string/taskTitleLabel"
         android:ems="10"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/taskTitle"
+        android:id="@+id/editTextTaskTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:layout_below="@+id/taskTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp"
-        android:id="@+id/taskDescription"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="@string/taskDescriptionLabel"/>
-
-    <Button
-        android:text="@string/saveLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/saveTask" />
 
     <Button
         android:text="@string/clearLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/saveTask"
-        android:layout_toEndOf="@+id/saveTask"
-        android:id="@+id/clearContent" />
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/holo_orange_dark"
+        android:id="@+id/buttonClearTask" />
+
+    <Button
+        android:text="@string/saveLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSaveTask"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:backgroundTint="@android:color/holo_orange_dark" />
 
     <Button
         android:text="@string/cancelLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/buttonCancelTask"
+        android:textColor="@android:color/holo_orange_dark"
+        android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/clearContent"
-        android:layout_toEndOf="@+id/clearContent"
-        android:id="@+id/cancelTask" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/endDateLabel"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTaskEndDate"
+        android:textAlignment="viewStart"
+        android:layout_width="80dp"
+        android:paddingTop="7dp"
+        android:layout_alignTop="@+id/imageButtonTaskSetDate"
+        android:layout_alignLeft="@+id/textViewTaskEndTime"
+        android:layout_alignStart="@+id/textViewTaskEndTime" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editTextTaskDescription"
+        android:hint="@string/taskDescriptionLabel"
+        android:layout_below="@+id/editTextTaskTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/checkBoxTaskCompleted"
+        android:text="@string/checkboxTaskCompletedLabel"
+        app:buttonTint="@android:color/holo_orange_dark"
+        android:layout_below="@+id/editTextTaskDescription"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        app:srcCompat="@drawable/ic_device_access_time"
+        android:id="@+id/imageButtonTaskSetTime"
+        android:tint="@android:color/holo_orange_dark"
+        android:background="@android:color/transparent"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/imageButtonTaskSetDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTaskEndTime"
+        android:text="@string/endTimeLabel"
+        android:textAlignment="textStart"
+        android:layout_alignTop="@+id/imageButtonTaskSetTime"
+        android:layout_toLeftOf="@+id/buttonClearTask"
+        android:layout_toStartOf="@+id/buttonClearTask"
+        android:layout_marginTop="7dp" />
+
+    <ImageButton
+        app:srcCompat="@drawable/ic_action_today"
+        android:id="@+id/imageButtonTaskSetDate"
+        android:tint="@android:color/holo_orange_dark"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:background="@android:color/transparent"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/checkBoxTaskCompleted"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
