@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardUseCompatPadding="true"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:weightSum="1"
+        android:padding="@dimen/padding_card">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.975"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_card">
+
+            <TextView
+                android:id="@+id/texTaskTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="@string/taskTitleLabel"
+                android:textColor="@android:color/black"
+                android:textAllCaps="true" />
+
+            <TextView
+                android:id="@+id/texTaskDescription"
+                android:text="@string/taskDescriptionLabel"
+                android:textColor="@android:color/darker_gray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/texTaskDate"
+                    android:text="@string/noDate"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text=" | "
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/texTaskTime"
+                    android:text="@string/noTime"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/vieCompleted"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_weight="0.025"
+            android:background="@color/colorPrimary"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

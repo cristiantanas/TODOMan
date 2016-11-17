@@ -8,14 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
+        <activity android:name=".views.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewTaskActivity"></activity>
+        <activity android:name=".views.NewTaskActivity"></activity>
+        <receiver android:name=".presenter.TaskTimeBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="org.uab.dedam.todoman.TASK_NOTIFY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
-
 </manifest>
