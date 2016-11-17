@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -176,9 +177,12 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
     private Notification getTodoNotification(String title) {
         PendingIntent openAppIntent = PendingIntent.getActivity(this, 0, new Intent(this, HomeActivity.class),0);
 
+        RemoteViews notificationContentView = new RemoteViews(getPackageName(), R.layout.notification);
+        notificationContentView.setTextViewText(R.id.appName, title);
+
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle(title)
-            .setContentText(getResources().getString(R.string.timeToDoTask))
+            .setContent(notificationContentView)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentIntent(openAppIntent)
             .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
