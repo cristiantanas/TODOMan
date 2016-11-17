@@ -1,6 +1,10 @@
 package org.uab.dedam.todoman.views;
 
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -95,12 +99,23 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
                 String date = texDate.getText().toString();
                 String time = texTime.getText().toString();
                 boolean isCompleted = swtCompleted.isChecked();
-                boolean resultSaved = presenter.saveTasks(title, description, isCompleted, date, time);
 
-                if(resultSaved){
+                long idTask = presenter.saveTasks(title, description, isCompleted, date, time);
+
+                if(idTask > 0)
+                {
+                    // Only if there is a date, we save a notification
+                    if(date != getResources().getString(R.string.noDate))
+                    {
+                        // If no time, so define a default
+                        time = time != getResources().getString(R.string.noTime) ? time : getResources().getString(R.string.defaultTime);
+                        presenter.saveTaskTimeNotification(getTodoNotification(title), idTask, date, time);
+                    }
+
                     showMessage(getResources().getString(R.string.taskSaved), false);
                 }
-                else{
+                else
+                {
                     showMessage(getResources().getString(R.string.taskNoSaved), true);
                 }
                 finish();
@@ -121,8 +136,8 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
                 texDescription.setText("");
                 texTitle.setText("");
                 swtCompleted.setChecked(false);
-                texDate.setText(getResources().getString(R.string.date));
-                texTime.setText(getResources().getString(R.string.time));
+                texDate.setText(getResources().getString(R.string.noDate));
+                texTime.setText(getResources().getString(R.string.noTime));
             }
         });
     }
@@ -156,6 +171,19 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
             return false;
         }
         return true;
+    }
+
+    private Notification getTodoNotification(String title) {
+        PendingIntent openAppIntent = PendingIntent.getActivity(this, 0, new Intent(this, HomeActivity.class),0);
+
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle(title)
+            .setContentText(getResources().getString(R.string.timeToDoTask))
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentIntent(openAppIntent)
+            .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+            .setAutoCancel(true);
+        return builder.build();
     }
 
     @Override

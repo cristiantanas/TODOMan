@@ -7,12 +7,14 @@
     <string name="cancelLabel">Cancel</string>
     <string name="newTaskLabel">New task</string>
     <string name="completed">Completed</string>
-    <string name="date">NO DATE</string>
-    <string name="time">NO TIME</string>
+    <string name="noDate">NO DATE</string>
+    <string name="noTime">NO TIME</string>
     <string name="setDate">SET DATE</string>
     <string name="setTime">SET TIME</string>
     <string name="noTasks">¡Yes! You have no pending tasks.</string>
-    <string name="validationError">Please, complete at least the "Task title" to save the task.</string>
+    <string name="validationError">Please, complete at least the "task title" to save the task.</string>
     <string name="taskSaved">¡Great! A new task has been created.</string>
     <string name="taskNoSaved">¡Great! Something is wrong, the tasks is not saved.</string>
+    <string name="timeToDoTask">¡Time to complete this task!</string>
+    <string name="defaultTime">08:00</string>
 </resources>

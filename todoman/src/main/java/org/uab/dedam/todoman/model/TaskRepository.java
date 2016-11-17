@@ -23,7 +23,22 @@ public class TaskRepository implements ITaskRepository{
     }
 
     @Override
-    public boolean saveTask(String title, String description, boolean completed, String endDate, String endTime)
+    public boolean isCompleted(long idTask)
+    {
+        String whereClause = TaskDatabaseContract.COLUMN_ID + " = ?";
+        String[] whereArgs = new String[] { String.valueOf(idTask) };
+
+        Cursor cursor = this.dataBaseObject.query(TaskDatabaseContract.TABLE_TASK,
+                null,
+                whereClause, whereArgs,
+                null, null, null);
+        cursor.moveToNext();
+        int completed = cursor.getInt(cursor.getColumnIndexOrThrow(TaskDatabaseContract.COlUMN_COMPLETED));
+        return  completed == 1;
+    }
+
+    @Override
+    public long saveTask(String title, String description, boolean completed, String endDate, String endTime)
     {
         try
         {
@@ -34,11 +49,11 @@ public class TaskRepository implements ITaskRepository{
             values.put(TaskDatabaseContract.COLUMN_END_DATE, endDate);
             values.put(TaskDatabaseContract.COLUMN_END_TIME, endTime);
             long id = this.dataBaseObject.insert(TaskDatabaseContract.TABLE_TASK, null, values);
-            return id != 0;
+            return id;
         }
         catch (Exception ex)
         {
-            return false;
+            return 0;
         }
     }
 }
