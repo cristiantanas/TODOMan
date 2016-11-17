@@ -17,20 +17,32 @@ public class TodomanBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         if (intent.getAction().equalsIgnoreCase(ACTION_TASKDUE)){
+            //create new INTENT to open NewTodoActivity
+
+            TaskRepository repo = new TaskRepository(context);
+
+            int todoId = intent.getIntExtra("todoId", -1);
+            String todoTitle = repo.getTaskTitle(todoId);
+
+            //unset HASALARM flag
+            repo.unsetHasAlarm(todoId);
+
             Intent taskIntent = new Intent(context, NewTodoActivity.class);
-            taskIntent.putExtra("todoId", intent.getIntExtra("todoId", -1));
+            taskIntent.putExtra("todoId", todoId);
             taskIntent.putExtra("action", NewTodoActivity.ACTION_EDITTASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, taskIntent, 0);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
             builder.setAutoCancel(true)
-                    .setContentTitle("TASK DUE")
-                    .setContentText("You have a task!")
+                    .setContentTitle("TASK DUE!")
+                    .setContentText(todoTitle)
                     .setSmallIcon(android.R.drawable.ic_dialog_info)
                     .setContentIntent(pendingIntent);
 
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.notify(1234, builder.build());
         }
+
     }
 }

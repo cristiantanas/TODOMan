@@ -31,7 +31,7 @@ public class NewTodoActivity extends AppCompatActivity {
     public static final int ACTION_NEWTASK = 1;
     public static final int ACTION_EDITTASK = 2;
     public static final int ACTION_DELETETASK = 3;
-    public static final int ACTION_DUETASK = 4; //used by the alarm
+    public static final int ACTION_DUETASK = 4; //used by the notification
     public static final int ACTION_SETTASKDONE = 5;
 
     EditText editTitle;
@@ -57,23 +57,21 @@ public class NewTodoActivity extends AppCompatActivity {
 
         switch (action) {
             case ACTION_SETTASKDONE:
-                //Set task DONE, CANCEL alarm
-                repo.setTaskDone(todoId);
+                //CANCEL alarm, set TASK DONE
                 cancelTaskAlarm();
+                repo.setTaskDone(todoId);
                 finish();
                 return;
 
             case ACTION_DELETETASK:
-                //DELETE task, CANCEL alarm
-                repo.deleteTask(todoId);
+                //CANCEL alarm, DELETE task
                 cancelTaskAlarm();
+                repo.deleteTask(todoId);
                 finish();
                 return;
 
             case ACTION_DUETASK:
-                //CREATE notification
 
-                //createTaskAlarm();
                 finish();
                 return;
 
@@ -89,7 +87,7 @@ public class NewTodoActivity extends AppCompatActivity {
                 throw new RuntimeException("Invalid action error");
         }
 
-        //NOW we can continue building up the UI
+        //Now we can continue building up the UI
         setContentView(R.layout.activity_new_todo);
 
         editTitle = (EditText) findViewById(R.id.editTodoTitle);
@@ -99,7 +97,7 @@ public class NewTodoActivity extends AppCompatActivity {
         checkDone = (CheckBox) findViewById(R.id.checkDone);
 
         if(openExisting){
-            //OPENING EXISTING TASK ITEM
+            //opening EXISTING TASK ITEM
             Cursor crs = repo.getTaskByID(todoId);
 
             //convert UTC date from DB to LOCAL date
@@ -108,13 +106,14 @@ public class NewTodoActivity extends AppCompatActivity {
             String datePart = textLocalDate.split(" ")[0];
             String timePart = textLocalDate.split(" ")[1];
 
+            //populate data into UI
             editTitle.setText(crs.getString(crs.getColumnIndexOrThrow(TaskDBContract.COLUMN_TITLE)));
             editDescription.setText(crs.getString(crs.getColumnIndexOrThrow(TaskDBContract.COLUMN_DESCRIPTION)));
             textDueDate.setText(datePart);
             textDueTime.setText(timePart);
             checkDone.setChecked(crs.getInt(crs.getColumnIndexOrThrow(TaskDBContract.COLUMN_DONE)) == 1);
         } else {
-            //CREATING NEW TASK ITEM - (default due date is in 30 days from now)
+            //creating NEW TASK ITEM - (default due date is in 30 days from now, 12:00)
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DATE, 30);
             textDueDate.setText(String.valueOf(calendar.get(Calendar.YEAR)) + "." +
@@ -123,7 +122,7 @@ public class NewTodoActivity extends AppCompatActivity {
             textDueTime.setText("12:00");
         }
 
-        //DATE SELECTION
+        //DATE PICKER
         textDueDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,7 +151,7 @@ public class NewTodoActivity extends AppCompatActivity {
             }
         });
 
-        //TIME SELECTION
+        //TIME PICKER
         textDueTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,12 +180,16 @@ public class NewTodoActivity extends AppCompatActivity {
                 String textUTCDate = Tools.convertToUTC(textDueDate.getText().toString() + " " + textDueTime.getText().toString());
 
                 if(openExisting){
+                    //update record, cancel ALARM, create new ALARM
                     repo.updateTask(todoId,
                             editTitle.getText().toString(),
                             editDescription.getText().toString(),
                             textUTCDate,
                             checkDone.isChecked());
+                    cancelTaskAlarm();
+                    createTaskAlarm();
                 }else {
+                    //insert new record, and create ALARM
                     todoId = repo.saveTask(editTitle.getText().toString(),
                             editDescription.getText().toString(),
                             textUTCDate);
@@ -196,14 +199,20 @@ public class NewTodoActivity extends AppCompatActivity {
             }
         });
 
-        //CLEAR
+        //CLEAR - set default values
         Button btnClear = (Button) findViewById(R.id.btnClear);
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DATE, 30);
+
                 editTitle.setText("");
                 editDescription.setText("");
-                textDueDate.setText("");
+                textDueDate.setText(String.valueOf(calendar.get(Calendar.YEAR)) + "." +
+                        String.format("%02d", calendar.get(Calendar.MONTH) + 1) + "." +
+                        String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)));
+                textDueTime.setText("12:00");
                 checkDone.setChecked(false);
             }
         });
@@ -221,7 +230,9 @@ public class NewTodoActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            textDueDate.setText(String.valueOf(year) + "." + String.format("%02d", monthOfYear + 1) + "." + String.format("%02d", dayOfMonth));
+            textDueDate.setText(String.valueOf(year) + "." +
+                    String.format("%02d", monthOfYear + 1) + "." +
+                    String.format("%02d", dayOfMonth));
         }
     };
 
@@ -240,15 +251,21 @@ public class NewTodoActivity extends AppCompatActivity {
         String textUTCDate = Tools.convertToUTC(textDueDate.getText().toString() + " " + textDueTime.getText().toString());
         Long msTime = Tools.convertFromUTCToMilliseconds(textUTCDate);
 
-        if(msTime==0){
-            Toast.makeText(this, "Something went wrong setting up the alarm", Toast.LENGTH_SHORT);
+        if(msTime<Calendar.getInstance().getTimeInMillis()){
+            Toast.makeText(this, "Can't set alarm in the past", Toast.LENGTH_SHORT).show();
             return;
         }
 
         alarmManager.set(AlarmManager.RTC, msTime, getTaskAlarmPendingIntent());
+
+        //update HASALARM flag
+        repo.setHasAlarm(todoId);
     }
 
     private  void cancelTaskAlarm(){
+        //clear HASALARM flag
+        repo.unsetHasAlarm(todoId);
+
         //get the AlarmManager
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(getTaskAlarmPendingIntent());
@@ -256,10 +273,9 @@ public class NewTodoActivity extends AppCompatActivity {
 
     private PendingIntent getTaskAlarmPendingIntent(){
         //prepare pending intent
-        Intent taskIntent = new Intent("org.uab.dedam.todoman.TASKDUE");
-        taskIntent.putExtra("todoId", todoId);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(NewTodoActivity.this, 1, taskIntent, 0);
-        return pendingIntent;
+        Intent alarmIntent = new Intent("org.uab.dedam.todoman.TASKDUE");
+        alarmIntent.putExtra("todoId", todoId);
+        return PendingIntent.getBroadcast(NewTodoActivity.this, 1, alarmIntent, 0);
     }
 
 }

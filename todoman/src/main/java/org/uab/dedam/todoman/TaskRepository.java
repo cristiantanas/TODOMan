@@ -35,6 +35,13 @@ public class TaskRepository {
         return task;
     }
 
+    public String getTaskTitle(int todoId){
+        String[] args = {String.valueOf(todoId)};
+        Cursor task = this.dbObj.query(TaskDBContract.TABLE_TASKS,null,"_id=?",args,null,null,null);
+        task.moveToFirst();
+        return task.getString(task.getColumnIndexOrThrow(TaskDBContract.COLUMN_TITLE));
+    }
+
     public int saveTask(String title, String description, String duedate){
         int recordID;
         ContentValues values = new ContentValues();
@@ -43,9 +50,7 @@ public class TaskRepository {
         values.put(TaskDBContract.COLUMN_DUEDATE, duedate);
         values.put(TaskDBContract.COLUMN_DONE, 0);
 
-        dbObj = this.taskDBOpenHelper.getWritableDatabase();
         recordID = (int) this.dbObj.insert(TaskDBContract.TABLE_TASKS, null, values);
-        dbObj.close();
 
         return recordID;
     }
@@ -59,9 +64,7 @@ public class TaskRepository {
 
         String[] args = {String.valueOf(todoId)};
 
-        dbObj = this.taskDBOpenHelper.getWritableDatabase();
         this.dbObj.update(TaskDBContract.TABLE_TASKS, values, "_id=?", args);
-        dbObj.close();
     }
 
     public void deleteTask(int todoId){
@@ -71,6 +74,19 @@ public class TaskRepository {
     public void setTaskDone(int todoId){
         ContentValues values = new ContentValues();
         values.put(TaskDBContract.COLUMN_DONE, 1);
+        values.put(TaskDBContract.COLUMN_HASALARM, 0);
+        this.dbObj.update(TaskDBContract.TABLE_TASKS, values, "_id=?", new String[]{String.valueOf(todoId)});
+    }
+
+    public void setHasAlarm(int todoId){
+        ContentValues values = new ContentValues();
+        values.put(TaskDBContract.COLUMN_HASALARM, 1);
+        this.dbObj.update(TaskDBContract.TABLE_TASKS, values, "_id=?", new String[]{String.valueOf(todoId)});
+    }
+
+    public void unsetHasAlarm(int todoId){
+        ContentValues values = new ContentValues();
+        values.put(TaskDBContract.COLUMN_HASALARM, 0);
         this.dbObj.update(TaskDBContract.TABLE_TASKS, values, "_id=?", new String[]{String.valueOf(todoId)});
     }
 }

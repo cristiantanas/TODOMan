@@ -14,4 +14,5 @@ public class TaskDBContract {
     public static String COLUMN_DESCRIPTION = "description";
     public static String COLUMN_DUEDATE = "duedate";
     public static String COLUMN_DONE = "done";
+    public static String COLUMN_HASALARM = "hasalarm";
 }

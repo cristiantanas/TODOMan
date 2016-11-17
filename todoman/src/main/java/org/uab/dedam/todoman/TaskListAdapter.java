@@ -2,6 +2,7 @@ package org.uab.dedam.todoman;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
@@ -49,14 +50,21 @@ public class TaskListAdapter extends CursorAdapter {
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         String duedate = cursor.getString(cursor.getColumnIndexOrThrow("duedate"));
         Boolean done = (cursor.getInt(cursor.getColumnIndexOrThrow("done")) == 1);
+        Boolean hasalarm = (cursor.getInt(cursor.getColumnIndexOrThrow("hasalarm")) == 1);
 
         //convert UTC date to LOCAL date
         duedate = Tools.convertFromUTC(duedate);
 
         if (done) {
+            imgDone.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.checkmark4));
             imgDone.setVisibility(View.VISIBLE);
         } else {
-            imgDone.setVisibility(View.INVISIBLE);
+            if (hasalarm){
+                imgDone.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.alarm));
+                imgDone.setVisibility(View.VISIBLE);
+            }else {
+                imgDone.setVisibility(View.INVISIBLE);
+            }
         }
         tvTitle.setText(title);
         tvDueDate.setText(duedate);
