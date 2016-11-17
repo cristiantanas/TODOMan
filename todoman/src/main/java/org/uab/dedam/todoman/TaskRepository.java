@@ -35,7 +35,8 @@ public class TaskRepository {
         return task;
     }
 
-    public void saveTask(String title, String description, String duedate){
+    public int saveTask(String title, String description, String duedate){
+        int recordID;
         ContentValues values = new ContentValues();
         values.put(TaskDBContract.COLUMN_TITLE, title);
         values.put(TaskDBContract.COLUMN_DESCRIPTION, description);
@@ -43,8 +44,10 @@ public class TaskRepository {
         values.put(TaskDBContract.COLUMN_DONE, 0);
 
         dbObj = this.taskDBOpenHelper.getWritableDatabase();
-        this.dbObj.insert(TaskDBContract.TABLE_TASKS, null, values);
+        recordID = (int) this.dbObj.insert(TaskDBContract.TABLE_TASKS, null, values);
         dbObj.close();
+
+        return recordID;
     }
 
     public void updateTask(int todoId, String title, String description, String duedate, boolean done){

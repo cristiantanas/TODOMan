@@ -15,7 +15,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewTodoActivity"></activity>
+
+        <activity android:name=".NewTodoActivity">
+
+        </activity>
+
+        <receiver android:name=".TodomanBroadcastReceiver">
+            <intent-filter>
+                <!-- ACTION TO SIGNAL A TASK IS DUE -->
+                <action android:name="org.uab.dedam.todoman.TASKDUE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

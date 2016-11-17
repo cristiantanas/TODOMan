@@ -1,18 +1,17 @@
 package org.uab.dedam.todoman;
 
+import android.app.AlarmManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -42,7 +41,12 @@ public class HomeActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.idContextMenuDelete:
-                repo.deleteTask(todoId);
+                //DELETE TASK
+                Intent intent = new Intent(HomeActivity.this, NewTodoActivity.class);
+                intent.putExtra("todoId", todoId);
+                intent.putExtra("action", NewTodoActivity.ACTION_DELETETASK);
+                startActivity(intent);
+
                 break;
 
             case R.id.idContextMenuTaskDone:
@@ -63,24 +67,28 @@ public class HomeActivity extends AppCompatActivity {
         registerForContextMenu(lview);
         UpdateTaskList();
 
+        //CREATE NEW TASK
         Button button = (Button) findViewById(R.id.btnNewTodo);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, NewTodoActivity.class);
+                intent.putExtra("action", NewTodoActivity.ACTION_NEWTASK);
                 startActivity(intent);
             }
         });
 
+        //OPEN EXISTING TASK
         lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int todoId;
-
                 cursorTaskList.moveToPosition(position);
-                todoId = cursorTaskList.getInt(cursorTaskList.getColumnIndexOrThrow("_id"));
+
+                int todoId = cursorTaskList.getInt(cursorTaskList.getColumnIndexOrThrow("_id"));
+
                 Intent intent = new Intent(HomeActivity.this, NewTodoActivity.class);
-                intent.putExtra("todoId",todoId);
+                intent.putExtra("todoId", todoId);
+                intent.putExtra("action", NewTodoActivity.ACTION_EDITTASK);
                 startActivity(intent);
             }
         });

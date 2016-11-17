@@ -50,6 +50,9 @@ public class TaskListAdapter extends CursorAdapter {
         String duedate = cursor.getString(cursor.getColumnIndexOrThrow("duedate"));
         Boolean done = (cursor.getInt(cursor.getColumnIndexOrThrow("done")) == 1);
 
+        //convert UTC date to LOCAL date
+        duedate = Tools.convertFromUTC(duedate);
+
         if (done) {
             imgDone.setVisibility(View.VISIBLE);
         } else {
