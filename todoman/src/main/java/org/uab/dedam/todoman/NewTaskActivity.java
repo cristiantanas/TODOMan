@@ -1,6 +1,9 @@
 package org.uab.dedam.todoman;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,8 +16,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
 
-public class NewTaskActivity extends AppCompatActivity implements DatePickerFragment.OnDateSetCallback {
+import java.util.Calendar;
+
+
+public class NewTaskActivity extends AppCompatActivity implements DatePickerFragment.OnDateSetCallback,TimePickerFragment.OnTimeSetCallback {
 
     private DbAdapter sqliteDatabase;
 
@@ -27,6 +34,8 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
     Button saveButton;
     Button cancelButton;
     Button clearButton;
+    Button taskSetHour;
+    TextView taskEndHour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,9 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
         saveButton = (Button) findViewById(R.id.saveTask);
         cancelButton = (Button) findViewById(R.id.cancelTask);
         clearButton = (Button) findViewById(R.id.clearTask);
+        taskSetHour = (Button) findViewById(R.id.taskSetHour);
+        taskEndHour =(TextView) findViewById(R.id.taskEndHour);
+
 
         taskSetDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,12 +64,21 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
             }
         });
 
+        taskSetHour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerFragment timePickerFragment=new TimePickerFragment();
+                timePickerFragment.show(getFragmentManager(),"timePickerFragment");
+            }
+        });
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = taskTitle.getText().toString();
                 String description = taskDescription.getText().toString();
                 String endDate = taskEndDate.getText().toString();
+                String endTime = taskEndHour.getText().toString();
                 Boolean done = taskCompleted.isChecked();
 
                 if (title.isEmpty()) {
@@ -65,8 +86,17 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
 
                 } else {
                     sqliteDatabase.openDatabaseForWrite();
-                    sqliteDatabase.saveTask(title, description, endDate, done);
-                    finish();
+                    sqliteDatabase.saveTask(title, description, endDate, endTime, done);
+
+                    int i = 1;
+                    Intent intent = new Intent(NewTaskActivity.this,TimerAlarm.class);
+                    PendingIntent pendingIntent =
+                            PendingIntent.getBroadcast(getApplicationContext(),234324243, intent, 0);
+                    AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+2000,
+                            pendingIntent);
+                    messageBox("Alarma puesta en "+5+" segundos");
+
                 }
             }
         });
@@ -97,6 +127,10 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
     @Override
     public void onDateSelected(String date) {
         taskEndDate.setText(date);
+    }
+
+    public void onTimeSelected(String hour) {
+        taskEndHour.setText(hour);
     }
 
     private void messageBox(String message) {

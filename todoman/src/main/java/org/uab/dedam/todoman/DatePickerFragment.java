@@ -70,5 +70,4 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         public abstract void onDateSelected(String date);
     };
 
-
 }

@@ -64,6 +64,19 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/taskSetDate" />
 
+            <TextView
+                android:text="@string/endHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:id="@+id/taskEndHour" />
+
+            <Button
+                android:text="@string/setHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/taskSetHour" />
+
         </LinearLayout>
 
 

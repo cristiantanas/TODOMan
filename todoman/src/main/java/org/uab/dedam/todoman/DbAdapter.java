@@ -27,11 +27,12 @@ public class DbAdapter {
     }
 
     //save task
-    public void saveTask(String taskTitle, String taskDescription, String taskEndDate, Boolean taskDone){
+    public void saveTask(String taskTitle, String taskDescription, String taskEndDate, String taskEndTime, Boolean taskDone){
         ContentValues values =new ContentValues();
         values.put(DataBaseToDoMan.TASK_TITLE,taskTitle);
         values.put(DataBaseToDoMan.TASK_DESCRIPTION,taskDescription);
         values.put(DataBaseToDoMan.TASK_END_DATE,taskEndDate);
+        values.put(DataBaseToDoMan.TASK_END_TIME,taskEndTime);
         values.put(DataBaseToDoMan.TASK_DONE,taskDone);
 
         this.sqLiteDatabase.insert(

@@ -33,23 +33,25 @@ public class CustomList extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         TextView tvTitle = (TextView) view.findViewById(R.id.itemTaskTitle);
-        TextView tvDesctiprion=(TextView) view.findViewById(R.id.itemTaskDescription);
+        TextView tvDescription=(TextView) view.findViewById(R.id.itemTaskDescription);
         TextView tvDate=(TextView)view.findViewById(R.id.itemTaskDate);
         ImageView ivDone=(ImageView) view.findViewById(R.id.doneIcon);
 
-        String txtTitle=cursor.getString(cursor.getColumnIndexOrThrow("title"));
-        String txtDescription=cursor.getString(cursor.getColumnIndexOrThrow("description"));
-        String txtDate=cursor.getString(cursor.getColumnIndexOrThrow("end_date"));
-        Boolean txtDone = cursor.getInt(cursor.getColumnIndexOrThrow("done")) != 0;
+        String txtTitle=cursor.getString(cursor.getColumnIndexOrThrow(DataBaseToDoMan.TASK_TITLE));
+        String txtDescription=cursor.getString(cursor.getColumnIndexOrThrow(DataBaseToDoMan.TASK_DESCRIPTION));
+        String txtDate=cursor.getString(cursor.getColumnIndexOrThrow(DataBaseToDoMan.TASK_END_DATE));
+        String txtTime=cursor.getString(cursor.getColumnIndexOrThrow(DataBaseToDoMan.TASK_END_TIME));
+        Boolean txtDone = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseToDoMan.TASK_DONE)) != 0;
 
         tvTitle.setText(txtTitle);
         if(txtDone) {
             ivDone.setVisibility(VISIBLE);
         }
-        if(txtDescription.isEmpty())tvDesctiprion.setVisibility(GONE);
-        else tvDesctiprion.setText(txtDescription);
-        tvDate.setText(txtDate);
+        if(txtDescription.isEmpty())tvDescription.setVisibility(GONE);
+        else tvDescription.setText(txtDescription);
+        tvDate.setText(txtTime+" ("+txtDate+")");
 
     }
+
 
 }

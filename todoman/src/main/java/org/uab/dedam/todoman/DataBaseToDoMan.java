@@ -16,6 +16,7 @@ public class DataBaseToDoMan extends SQLiteOpenHelper{
     public static final String TASK_TITLE="title";
     public static final String TASK_DESCRIPTION="description";
     public static final String TASK_END_DATE="end_date";
+    public static final String TASK_END_TIME="end_time";
     public static final String TASK_DONE="done";
 
     static final String[] COLUMNS = {
@@ -23,6 +24,7 @@ public class DataBaseToDoMan extends SQLiteOpenHelper{
             TASK_TITLE,
             TASK_DESCRIPTION,
             TASK_END_DATE,
+            TASK_END_TIME,
             TASK_DONE
     };
 
@@ -32,6 +34,7 @@ public class DataBaseToDoMan extends SQLiteOpenHelper{
             +TASK_TITLE+" text not null, "
             +TASK_DESCRIPTION+" text, "
             +TASK_END_DATE+" text, "
+            +TASK_END_TIME+" text,"
             +TASK_DONE+" boolean not null)";
 
     public DataBaseToDoMan(Context context) {
