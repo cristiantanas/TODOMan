@@ -22,8 +22,28 @@ public class TimerAlarm extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context,"Timer Alarm lanzado", Toast.LENGTH_SHORT).show();
-        //El vibrador del dispositivo
-        Vibrator vibrator =(Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(2000);
+
+        Intent intentReturnHome=new Intent(context,HomeActivity.class);
+
+        //Notification
+        PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intentReturnHome,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        builder.setAutoCancel(true)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Notification title")
+                .setContentText("Notification details")
+                .setTicker("I'm a ticker")
+                .setContentIntent(pendingIntent);
+
+        Notification notification = builder.build();
+        NotificationManager notificationManager = (NotificationManager)
+                context.getSystemService(NOTIFICATION_SERVICE);
+
+
+        notificationManager.notify(123456,notification);
+
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(500);
     }
 }

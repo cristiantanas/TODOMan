@@ -63,7 +63,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        this.listener.onTimeSelected(hourOfDay+":"+minute);
+        this.listener.onTimeSelected(String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
     }
 
     public interface OnTimeSetCallback{

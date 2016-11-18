@@ -18,7 +18,10 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class NewTaskActivity extends AppCompatActivity implements DatePickerFragment.OnDateSetCallback,TimePickerFragment.OnTimeSetCallback {
@@ -36,6 +39,8 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
     Button clearButton;
     Button taskSetHour;
     TextView taskEndHour;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,15 +93,20 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
                     sqliteDatabase.openDatabaseForWrite();
                     sqliteDatabase.saveTask(title, description, endDate, endTime, done);
 
-                    int i = 1;
+                    String dateString=endDate+" "+endTime;
+                    Date alarmDate=stringToDate(dateString);
+                    long alarmMillis=alarmDate.getTime();
+
                     Intent intent = new Intent(NewTaskActivity.this,TimerAlarm.class);
                     PendingIntent pendingIntent =
                             PendingIntent.getBroadcast(getApplicationContext(),234324243, intent, 0);
-                    AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+2000,
-                            pendingIntent);
-                    messageBox("Alarma puesta en "+5+" segundos");
 
+
+                    AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmMillis,
+                            pendingIntent);
+                    messageBox("Alarma puesta: "+dateString);
+                    finish();
                 }
             }
         });
@@ -121,7 +131,22 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
         taskTitle.setText("");
         taskDescription.setText("");
         taskEndDate.setText("No Date");
+        taskEndHour.setText("No Hour");
         taskCompleted.setChecked(false);
+    }
+
+    private Date stringToDate(String dateString){
+        Date convertedDate=new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy hh:mm");
+
+        try {
+            convertedDate=dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return convertedDate;
     }
 
     @Override
