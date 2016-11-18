@@ -21,7 +21,7 @@
         android:id="@+id/taskTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:contentDescription="@string/taskTitleLabel" />
+        android:hint="@string/taskTitleLabel" />
 
     <EditText
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
         android:id="@+id/taskDescription"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:contentDescription="@string/taskDescriptionLabel" />
+        android:hint="@string/taskDescriptionLabel" />
 
     <Button
         android:text="@string/saveLabel"
@@ -65,33 +65,58 @@
         android:id="@+id/cancelTask" />
 
     <TextView
-        android:text="Set date"
+        android:text="@string/set_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/taskDescription"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="22dp"
-        android:id="@+id/taskDate" />
+        android:layout_marginTop="60dp"
+        android:id="@+id/taskDate"
+        android:layout_toStartOf="@+id/cancelTask"
+        android:layout_toLeftOf="@+id/cancelTask" />
 
     <Button
-        android:text="Set Date"
+        android:text="@string/set_date_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/taskDescription"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginRight="12dp"
         android:layout_marginEnd="12dp"
-        android:id="@+id/taskSetDate" />
+        android:id="@+id/taskSetDate"
+        android:layout_alignBaseline="@+id/taskDate"
+        android:layout_alignBottom="@+id/taskDate"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <CheckBox
-        android:text="Completed"
+        android:text="@string/completed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
         android:id="@+id/taskComplete"
-        android:layout_below="@+id/taskSetDate"
+        android:layout_above="@+id/saveTask"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="43dp" />
+
+    <Button
+        android:text="@string/set_time_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:id="@+id/taskSetTime"
+        android:layout_below="@+id/taskSetDate"
+        android:layout_alignLeft="@+id/taskSetDate"
+        android:layout_alignStart="@+id/taskSetDate" />
+
+    <TextView
+        android:text="@string/set_time_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/taskSetTime"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp"
+        android:id="@+id/taskTime"
+        android:layout_alignRight="@+id/taskDate"
+        android:layout_alignEnd="@+id/taskDate" />
 </RelativeLayout>
