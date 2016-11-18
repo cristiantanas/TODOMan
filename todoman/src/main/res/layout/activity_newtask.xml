@@ -4,7 +4,7 @@
 			 android:id="@+id/activity_sub"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="org.uab.dedam.todoman.NewTaskActivity">
+             tools:context="org.uab.dedam.todoman.TaskActivity">
 
     <TableRow>
         <TextView

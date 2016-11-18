@@ -1,42 +1,14 @@
 package org.uab.dedam.todoman;
 
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.UserHandle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements HomeView {
@@ -62,12 +34,18 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 		setContentView(R.layout.activity_home);
 		homeActivityContext=this;
 				lst_taskList=(ListView)findViewById(R.id.lst_taskList);
-		presenter=new HomePresenterImpl(homeActivityContext, this, null, new FindItemsInteractorImpl());
+		presenter=new HomePresenterImpl(homeActivityContext, this, null, new DataBaseInteractorImpl(), new AlarmsInteractorImpl());
 		Button btn_taskNew=(Button)findViewById(R.id.btn_taskNew);
 		btn_taskNew.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				presenter.onNewTaskClicked();
+			}
+		});
+		lst_taskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				presenter.onTaskClicked(id);
 			}
 		});
 	}

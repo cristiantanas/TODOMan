@@ -1,7 +1,7 @@
 package org.uab.dedam.todoman;
 
 public class task {
-    private int id;
+    private long id;
     private String name;
     private String description;
     private String date;
@@ -12,7 +12,7 @@ public class task {
         super();
     }
 
-    public task(int id, String name, String description, String date, String time, Boolean completed) {
+    public task(long id, String name, String description, String date, String time, Boolean completed) {
         super();
         this.id = id;
         this.name = name;
@@ -22,8 +22,8 @@ public class task {
         this.completed = completed;
     }
 
-    public int getId(){return id;}
-    public void setId(int id){this.id = id;}
+    public long getId(){return id;}
+    public void setId(long id){this.id = id;}
 
     public String getName(){return name;}
     public void setName(String name) {this.name = name;}

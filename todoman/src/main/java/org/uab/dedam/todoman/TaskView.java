@@ -2,13 +2,13 @@ package org.uab.dedam.todoman;
 
 import java.util.List;
 
-public interface NewTaskView {
+public interface TaskView {
     
     void clearForm();
 
-void fillForm();
+void fillForm(task myTask);
 
-void validityForm();
+boolean validityForm();
 
 void closeForm();
 

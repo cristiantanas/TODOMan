@@ -1,17 +1,21 @@
 package org.uab.dedam.todoman;
 
 import android.content.Context;
+import android.os.Bundle;
 
 public interface HomePresenter {
 
     void onResume();
 
+    void onDestroy();
+
 void onNewTaskClicked();
 
-    void onItemClicked(int position);
+    void onTaskClicked(long taskId);
 
 void onTaskSaveClicked(task myTask);
 
-    void onDestroy();
+        task getTaskFromIntent(Bundle taskBundle);
 
 }
+

@@ -17,4 +17,5 @@
     <string name="validityTime">El campo Hora no puede estar vacío</string>
     <string name="validityDialogName">Formulario incompleto</string>
     <string name="OkButton">Aceptar</string>
+    <string name="taskNotification">La tarea ha vencido</string>
 </resources>

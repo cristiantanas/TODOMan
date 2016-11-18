@@ -43,7 +43,7 @@ db.execSQL(CREATE_TASKS_TABLE);
 
 @Override
 public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+// TODO Implementar método para actualización de base de datos por versiones.
 }
 
 }

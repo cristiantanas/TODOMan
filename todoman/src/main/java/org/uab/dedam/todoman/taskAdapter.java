@@ -42,7 +42,8 @@ public class taskAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        task myTask = tasks.get(position);
+        return myTask.getId();
     }
 
     @Override

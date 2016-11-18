@@ -1,14 +1,9 @@
 package org.uab.dedam.todoman;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.DialogFragment;
 import android.content.Context;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,12 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.List;
 
-public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
+import java.util.Calendar;
+
+public class TaskActivity extends AppCompatActivity implements TaskView {
     EditText txt_taskName;
     EditText txt_taskDescription;
     EditText txt_taskDate;
@@ -34,7 +27,8 @@ public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
     Button btn_taskClear;
     Button btn_taskCancel;
     HomePresenter presenter;
-    Context newTaskActivityContext;
+    Context taskActivityContext;
+    task myTask;
     Handler h = new Handler(){
         @Override
         public void handleMessage(Message msg){
@@ -51,8 +45,8 @@ public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newtask);
-        newTaskActivityContext = this;
-        presenter = new HomePresenterImpl(newTaskActivityContext, null, this, new FindItemsInteractorImpl());
+        taskActivityContext = this;
+        presenter = new HomePresenterImpl(taskActivityContext, null, this, new DataBaseInteractorImpl(), new AlarmsInteractorImpl());
         txt_taskName = (EditText) findViewById(R.id.txt_taskName);
         txt_taskDescription = (EditText) findViewById(R.id.txt_taskDescription);
         txt_taskDate = (EditText) findViewById(R.id.txt_taskDate);
@@ -63,7 +57,9 @@ public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
         btn_taskSave = (Button) findViewById(R.id.btn_taskSave);
         btn_taskClear = (Button) findViewById(R.id.btn_taskClear);
         btn_taskCancel = (Button) findViewById(R.id.btn_taskCancel);
-        fillForm();
+        Bundle taskBundle=getIntent().getExtras();
+        myTask=presenter.getTaskFromIntent(taskBundle);
+        fillForm(myTask);
         btn_taskDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +75,10 @@ public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
         btn_taskSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validityForm();
+                if(validityForm()==true){
+                    presenter.onTaskSaveClicked(myTask);
+                    finish();
+                }
             }
         });
         btn_taskClear.setOnClickListener(new View.OnClickListener() {
@@ -121,11 +120,20 @@ public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
         txt_taskDescription.setText("");
         txt_taskDate.setText("");
         txt_taskTime.setText("");
+        tgl_taskCompleted.setChecked(false);
     }
 
     @Override
-    public void fillForm() {
-        setCurrentDateAndTime();
+    public void fillForm(task myTask) {
+        if (myTask.getId()==0){
+            setCurrentDateAndTime();
+        }else{
+            txt_taskName.setText(myTask.getName());
+            txt_taskDescription.setText(myTask.getDescription());
+            txt_taskDate.setText(myTask.getDate());
+            txt_taskTime.setText(myTask.getTime());
+            tgl_taskCompleted.setChecked(myTask.getCompleted());
+                    }
     }
 
     private void setCurrentDateAndTime() {
@@ -149,7 +157,7 @@ public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
     }
 
     @Override
-    public void validityForm() {
+    public boolean validityForm() {
         String message = "";
         if (TextUtils.isEmpty(txt_taskName.getText().toString())){
             message = getResources().getString(R.string.validityName);
@@ -165,16 +173,15 @@ public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
         }
 
         if (message == "") {
-            task myTask = new task();
-            myTask.setName(txt_taskName.getText().toString());
+                        myTask.setName(txt_taskName.getText().toString());
             myTask.setDescription(txt_taskDescription.getText().toString());
             myTask.setDate(txt_taskDate.getText().toString());
             myTask.setTime(txt_taskTime.getText().toString());
             myTask.setCompleted(tgl_taskCompleted.isChecked());
-            presenter.onTaskSaveClicked(myTask);
-            finish();
+            return true;
         } else {
             showMessage(message);
+            return false;
         }
 
     }
@@ -190,5 +197,5 @@ public class NewTaskActivity extends AppCompatActivity implements NewTaskView {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-}
+    }
 
