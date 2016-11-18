@@ -18,6 +18,10 @@ public class TaskRepository {
         this.dbObj = this.taskDBOpenHelper.getWritableDatabase();
     }
 
+    public void CloseDB(){
+        if(dbObj.isOpen()) {this.dbObj.close();}
+    }
+
     public Cursor getTasks(){
         Cursor tasks = this.dbObj.query(TaskDBContract.TABLE_TASKS,null,null,null,null,null,null);
         return tasks;
@@ -39,19 +43,18 @@ public class TaskRepository {
         String[] args = {String.valueOf(todoId)};
         Cursor task = this.dbObj.query(TaskDBContract.TABLE_TASKS,null,"_id=?",args,null,null,null);
         task.moveToFirst();
-        return task.getString(task.getColumnIndexOrThrow(TaskDBContract.COLUMN_TITLE));
+        String taskTitle = task.getString(task.getColumnIndexOrThrow(TaskDBContract.COLUMN_TITLE));
+        return taskTitle;
     }
 
     public int saveTask(String title, String description, String duedate){
-        int recordID;
         ContentValues values = new ContentValues();
         values.put(TaskDBContract.COLUMN_TITLE, title);
         values.put(TaskDBContract.COLUMN_DESCRIPTION, description);
         values.put(TaskDBContract.COLUMN_DUEDATE, duedate);
         values.put(TaskDBContract.COLUMN_DONE, 0);
 
-        recordID = (int) this.dbObj.insert(TaskDBContract.TABLE_TASKS, null, values);
-
+        int recordID = (int) this.dbObj.insert(TaskDBContract.TABLE_TASKS, null, values);
         return recordID;
     }
 

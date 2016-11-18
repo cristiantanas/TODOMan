@@ -2,14 +2,11 @@ package org.uab.dedam.todoman;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -31,8 +28,7 @@ public class NewTodoActivity extends AppCompatActivity {
     public static final int ACTION_NEWTASK = 1;
     public static final int ACTION_EDITTASK = 2;
     public static final int ACTION_DELETETASK = 3;
-    public static final int ACTION_DUETASK = 4; //used by the notification
-    public static final int ACTION_SETTASKDONE = 5;
+    public static final int ACTION_SETTASKDONE = 4;
 
     EditText editTitle;
     EditText editDescription;
@@ -45,7 +41,6 @@ public class NewTodoActivity extends AppCompatActivity {
     int todoId;
     int action;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,29 +52,28 @@ public class NewTodoActivity extends AppCompatActivity {
 
         switch (action) {
             case ACTION_SETTASKDONE:
-                //CANCEL alarm, set TASK DONE
+                //CANCEL alarm, set TASK DONE, CLOSE DB
                 cancelTaskAlarm();
                 repo.setTaskDone(todoId);
+                repo.CloseDB();
                 finish();
                 return;
 
             case ACTION_DELETETASK:
-                //CANCEL alarm, DELETE task
+                //CANCEL alarm, DELETE task, CLOSE DB
                 cancelTaskAlarm();
                 repo.deleteTask(todoId);
-                finish();
-                return;
-
-            case ACTION_DUETASK:
-
+                repo.CloseDB();
                 finish();
                 return;
 
             case ACTION_EDITTASK:
+                //set openExisting flag, and continue with UI
                 openExisting=true;
                 break;
 
             case ACTION_NEWTASK:
+                //set openExisting flag, and continue with UI
                 openExisting=false;
                 break;
 
@@ -113,7 +107,7 @@ public class NewTodoActivity extends AppCompatActivity {
             textDueTime.setText(timePart);
             checkDone.setChecked(crs.getInt(crs.getColumnIndexOrThrow(TaskDBContract.COLUMN_DONE)) == 1);
         } else {
-            //creating NEW TASK ITEM - (default due date is in 30 days from now, 12:00)
+            //creating NEW TASK ITEM - (default DueDate is 30 days from now at 12:00)
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DATE, 30);
             textDueDate.setText(String.valueOf(calendar.get(Calendar.YEAR)) + "." +
@@ -186,14 +180,19 @@ public class NewTodoActivity extends AppCompatActivity {
                             editDescription.getText().toString(),
                             textUTCDate,
                             checkDone.isChecked());
+
+                    //cancel old alarm
                     cancelTaskAlarm();
-                    createTaskAlarm();
+                    //create new alarm, if not DONE
+                    if(!checkDone.isChecked()) { createTaskAlarm(); }
+
                 }else {
                     //insert new record, and create ALARM
                     todoId = repo.saveTask(editTitle.getText().toString(),
                             editDescription.getText().toString(),
                             textUTCDate);
-                    createTaskAlarm();
+
+                    if(!checkDone.isChecked()) { createTaskAlarm(); }
                 }
                 finish();
             }
@@ -214,6 +213,9 @@ public class NewTodoActivity extends AppCompatActivity {
                         String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)));
                 textDueTime.setText("12:00");
                 checkDone.setChecked(false);
+
+                //if we are editing an existing item, cancel alarm
+                if (openExisting) { cancelTaskAlarm(); }
             }
         });
 
@@ -225,6 +227,15 @@ public class NewTodoActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        if (repo != null) {
+            repo.CloseDB();
+            repo = null;
+        }
+        super.onStop();
     }
 
     DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -239,7 +250,8 @@ public class NewTodoActivity extends AppCompatActivity {
     TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            textDueTime.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+            textDueTime.setText(String.format("%02d", hourOfDay) + ":" +
+                                String.format("%02d", minute));
         }
     };
 
@@ -263,19 +275,19 @@ public class NewTodoActivity extends AppCompatActivity {
     }
 
     private  void cancelTaskAlarm(){
-        //clear HASALARM flag
-        repo.unsetHasAlarm(todoId);
-
         //get the AlarmManager
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(getTaskAlarmPendingIntent());
+
+        //clear HASALARM flag
+        repo.unsetHasAlarm(todoId);
     }
 
     private PendingIntent getTaskAlarmPendingIntent(){
         //prepare pending intent
         Intent alarmIntent = new Intent("org.uab.dedam.todoman.TASKDUE");
         alarmIntent.putExtra("todoId", todoId);
-        return PendingIntent.getBroadcast(NewTodoActivity.this, 1, alarmIntent, 0);
+        return PendingIntent.getBroadcast(NewTodoActivity.this, todoId, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
 }

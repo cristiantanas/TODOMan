@@ -1,6 +1,5 @@
 package org.uab.dedam.todoman;
 
-import android.app.AlarmManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -36,21 +35,25 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int todoId;
+
+        //we have the ID in the View.Tag property
         View itemView = ((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).targetView;
         todoId = (int) itemView.getTag();
 
         switch (item.getItemId()){
             case R.id.idContextMenuDelete:
                 //DELETE TASK
-                Intent intent = new Intent(HomeActivity.this, NewTodoActivity.class);
-                intent.putExtra("todoId", todoId);
-                intent.putExtra("action", NewTodoActivity.ACTION_DELETETASK);
-                startActivity(intent);
-
+                Intent intentTaskDelete = new Intent(HomeActivity.this, NewTodoActivity.class);
+                intentTaskDelete.putExtra("todoId", todoId);
+                intentTaskDelete.putExtra("action", NewTodoActivity.ACTION_DELETETASK);
+                startActivity(intentTaskDelete);
                 break;
 
             case R.id.idContextMenuTaskDone:
-                repo.setTaskDone(todoId);
+                Intent intentTaskDone = new Intent(HomeActivity.this, NewTodoActivity.class);
+                intentTaskDone.putExtra("todoId", todoId);
+                intentTaskDone.putExtra("action", NewTodoActivity.ACTION_SETTASKDONE);
+                startActivity(intentTaskDone);
                 break;
         }
 
@@ -93,6 +96,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStop() {
+        if (repo != null) {
+            repo.CloseDB();
+            repo = null;
+        }
+        super.onStop();
     }
 
     private void UpdateTaskList(){

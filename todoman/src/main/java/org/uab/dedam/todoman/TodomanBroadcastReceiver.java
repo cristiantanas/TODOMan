@@ -26,13 +26,14 @@ public class TodomanBroadcastReceiver extends BroadcastReceiver {
             int todoId = intent.getIntExtra("todoId", -1);
             String todoTitle = repo.getTaskTitle(todoId);
 
-            //unset HASALARM flag
+            //unset HASALARM flag and CLOSE DB
             repo.unsetHasAlarm(todoId);
+            repo.CloseDB();
 
             Intent taskIntent = new Intent(context, NewTodoActivity.class);
             taskIntent.putExtra("todoId", todoId);
             taskIntent.putExtra("action", NewTodoActivity.ACTION_EDITTASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, taskIntent, 0);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, taskIntent, PendingIntent.FLAG_CANCEL_CURRENT);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
             builder.setAutoCancel(true)
                     .setContentTitle("TASK DUE!")
@@ -41,7 +42,7 @@ public class TodomanBroadcastReceiver extends BroadcastReceiver {
                     .setContentIntent(pendingIntent);
 
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            manager.notify(1234, builder.build());
+            manager.notify(todoTitle, 1, builder.build());
         }
 
     }
