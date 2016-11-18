@@ -16,6 +16,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewTaskActivity"></activity>
+        <receiver android:name="org.uab.dedam.todoman.NotificationLauncher">
+            <intent-filter>
+                <action android:name="org.uab.dedam.todoman.LAUNCH_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
