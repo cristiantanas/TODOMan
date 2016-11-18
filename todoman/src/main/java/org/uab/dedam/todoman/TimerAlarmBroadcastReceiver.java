@@ -23,7 +23,7 @@ public class TimerAlarmBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        
+
         String titleNotification=intent.getExtras().getString("title");
         String descriptionNotification=intent.getExtras().getString("description");
         String tickerNotification="New notification";

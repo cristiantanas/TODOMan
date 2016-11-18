@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -87,25 +88,40 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
                     sqliteDatabase.openDatabaseForWrite();
                     sqliteDatabase.saveTask(title, description, endDate, endTime, done);
 
-                    String dateString=endDate+" "+endTime;
-                    Date alarmDate=stringToDate(dateString);
-                    long alarmMillis=alarmDate.getTime();
 
-                    Intent intent = new Intent(SAVE_AND_GO);
+                    if(endTime.equals("No Hour") && endDate.equals("No Date")){
+                        messageBox("No Alarm Selected");
+                    }
+                    else{
 
-                    intent.putExtra("title",title);
-                    intent.putExtra("description",description);
-                    intent.putExtra("done",done);
+                        if(endDate.equals("No Date")){
+                            endDate=getToday();
+                        }
+                        if(endTime.equals("No Hour")){
+                            endTime="23:59";
+                        }
+                        String dateString = endDate+" "+endTime;
+                        Date alarmDate=stringToDate(dateString);
+                        long alarmMillis=alarmDate.getTime();
+
+                        Intent intent = new Intent(SAVE_AND_GO);
+
+                        intent.putExtra("title",title);
+                        intent.putExtra("description",description);
+                        intent.putExtra("done",done);
 
 
-                    PendingIntent pendingIntent =
-                            PendingIntent.getBroadcast(getApplicationContext(),234324243, intent, 0);
+                        PendingIntent pendingIntent =
+                                PendingIntent.getBroadcast(getApplicationContext(),234324243, intent, 0);
 
 
-                    AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmMillis,
-                            pendingIntent);
-                    messageBox("Alarma puesta: "+dateString);
+                        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmMillis,
+                                pendingIntent);
+                        messageBox("Alarma puesta: "+dateString);
+
+                    }
+
                     finish();
                 }
             }
@@ -161,5 +177,13 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
     private void messageBox(String message) {
         Toast.makeText(this.getApplicationContext(),
                 message, Toast.LENGTH_SHORT).show();
+    }
+    private String getToday(){
+        Calendar calendar= Calendar.getInstance();
+        String today= String.format(String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)) + "-"
+                + String.format("%02d",(calendar.get(Calendar.MONTH)+1))+"-"
+                +calendar.get(Calendar.YEAR)
+        );
+        return today;
     }
 }
