@@ -9,7 +9,7 @@ import org.uab.dedam.todoman.Contract.TaskReaderContract.TaskEntry;
 public class DataBaseOpenHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "taskDB";
-    private static final int DB_VERSION = 12;
+    private static final int DB_VERSION = 14;
 
 
     public DataBaseOpenHelper(Context context) {

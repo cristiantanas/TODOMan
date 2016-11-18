@@ -28,7 +28,9 @@ public class TaskReaderContract {
                         _ID + "," +
                         TITLE + "," +
                         DESCRIPTION + "," +
-                        DONE +
+                        DONE +  "," +
+                        DUEDATE + "," +
+                        DUETIME +
                         " FROM " + TABLE_NAME;
 
     }

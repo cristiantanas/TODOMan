@@ -6,12 +6,12 @@ import android.widget.ListView;
 
 import org.uab.dedam.todoman.Adapter.UITaskCursorAdapter;
 import org.uab.dedam.todoman.DB.SQLiteDataRepository;
+import org.uab.dedam.todoman.Model.TaskModel;
 
 public class TaskPresenter implements ITaskPresenter {
 
     Context context;
     SQLiteDataRepository sqLiteDataRepository;
-    ListView listTasks;
 
     public TaskPresenter(Context context) {
         this.context = context;
@@ -19,14 +19,16 @@ public class TaskPresenter implements ITaskPresenter {
     }
 
     @Override
-    public void addTask(String title, String description, Boolean done, String dueDate, String dueTime) {
+    public long addTask(String title, String description, Boolean done, String dueDate, String dueTime) {
         sqLiteDataRepository.openDatabaseForWrite();
-        sqLiteDataRepository.saveTask(
+        long taskId = sqLiteDataRepository.saveTask(
                 title,
                 description,
                 done,
                 dueDate,
                 dueTime);
+        sqLiteDataRepository.closeDatabase();
+        return taskId;
     }
 
     @Override
@@ -35,5 +37,14 @@ public class TaskPresenter implements ITaskPresenter {
         Cursor cursor = sqLiteDataRepository.loadAllTasks();
         UITaskCursorAdapter cursorAdapter = new UITaskCursorAdapter(context, cursor);
         listTasks.setAdapter(cursorAdapter);
+        sqLiteDataRepository.closeDatabase();
+    }
+
+    @Override
+    public TaskModel getTask(long alarmId) {
+        sqLiteDataRepository.openDatabaseForReadOnly();
+        TaskModel taskModel = sqLiteDataRepository.loadTask(alarmId);
+        sqLiteDataRepository.closeDatabase();
+        return taskModel;
     }
 }

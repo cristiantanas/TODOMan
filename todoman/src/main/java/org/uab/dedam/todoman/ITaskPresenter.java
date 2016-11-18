@@ -8,7 +8,7 @@ import org.uab.dedam.todoman.Model.TaskModel;
 import java.util.List;
 
 public interface ITaskPresenter {
-    void addTask(
+    long addTask(
             String title,
             String description,
             Boolean done,
@@ -16,4 +16,6 @@ public interface ITaskPresenter {
             String dueTime);
 
     void listAllTasks(ListView listView);
+
+    TaskModel getTask(long id);
 }

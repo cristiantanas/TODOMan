@@ -1,12 +1,13 @@
 package org.uab.dedam.todoman;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import org.uab.dedam.todoman.Service.TODOManService;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -27,6 +28,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         listTasks();
+
+        //startService(new Intent(getBaseContext(), TODOManService.class));
     }
 
     protected void listTasks() {

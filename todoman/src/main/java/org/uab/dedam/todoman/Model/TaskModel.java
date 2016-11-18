@@ -8,8 +8,8 @@ public class TaskModel {
     private String mTitle;
     private String mDescription;
     private Boolean mDone;
-    private Date mDueDate;
-    private Date mDueTime;
+    private String mDueDate;
+    private String mDueTime;
 
     public long getId() { return mTask_Id; }
     public void setId(int mTask_Id) { this.mTask_Id = mTask_Id; }
@@ -31,14 +31,14 @@ public class TaskModel {
     public void setDone(Boolean mDone) {
         this.mDone = mDone;
     }
-    public Date getDueDate() {
+    public String getDueDate() {
         return mDueDate;
     }
-    public void setDueDate(Date mDueDate) {
+    public void setDueDate(String mDueDate) {
         this.mDueDate = mDueDate;
     }
-    public Date getDueTime() {return mDueTime;}
-    public void setDueTime(Date mDueTime) { this.mDueTime = mDueTime; }
+    public String getDueTime() {return mDueTime;}
+    public void setDueTime(String mDueTime) { this.mDueTime = mDueTime; }
 
 
 }
