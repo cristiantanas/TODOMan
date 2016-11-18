@@ -23,7 +23,8 @@ public class TaskDB extends SQLiteOpenHelper {
                         "Title text, " +
                         "Description text, " +
                         "Completed integer not null default 0, " +
-                        "EndDate text)"
+                        "EndDate text,"+
+                        "EndTime text)"
         );
 
     }

@@ -13,5 +13,6 @@ public class TaskDBcontract {
         public static String COLUMN_DESCRIPTION = "Description";
         public static String COLUMN_COMPLETED = "Completed";
         public static String COLUMN_END_DATE = "EndDate";
+        public static String COLUMN_END_TIME = "EndTime";
 
 }

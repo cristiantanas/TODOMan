@@ -9,12 +9,17 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     ListView list;
     List<String> task = null;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +43,16 @@ public class HomeActivity extends AppCompatActivity {
         TaskRepository taskRepository = new TaskRepository(HomeActivity.this);
         Cursor cursor = taskRepository.getTasks();
         task = new ArrayList<String>();
-        String title ="", description ="", completed ="";
+        String title ="", description ="", completed ="", endDate="", endTime="";
         if(cursor.moveToFirst()){
             do {
                 title = cursor.getString(1);
                 description = cursor.getString(2);
                 completed = cursor.getString(3);
-                task.add(title+" - "+description+" - "+completed);
+                endDate = cursor.getString(4);
+                endTime = cursor.getString(5);
+
+                task.add('\n'+title+'\n'+'\n'+description+'\n'+'\n'+completed+'\n'+'\n'+endDate+'\n'+'\n'+endTime+'\n');
 
             }while (cursor.moveToNext());
         }
