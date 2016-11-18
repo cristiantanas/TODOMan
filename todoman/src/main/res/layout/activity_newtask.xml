@@ -1,66 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sub"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+			 android:id="@+id/activity_sub"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="org.uab.dedam.todoman.TaskActivity">
+
+    <TableRow>
+        <TextView
+            android:id="@+id/txv_contentTitle"
+            android:nextFocusUp="@+id/btn_taskCancel"
+            android:nextFocusLeft="@+id/btn_taskCancel"
+            android:nextFocusRight="@+id/txv_taskName"
+            android:nextFocusDown="@+id/txv_taskName"
+            android:text="@string/contentTitle"
+            android:layout_gravity="center"
+                        android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </TableRow>
+
+    <TableRow>
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="org.uab.dedam.todoman.NewTaskActivity">
+    android:layout_height="wrap_content"
+    android:id="@+id/grp_taskName"
+    android:orientation="horizontal">
 
-    <EditText
+    <TextView
+        android:id="@+id/txv_taskName"
+        android:nextFocusUp="@+id/txv_contentTitle"
+        android:nextFocusLeft="@+id/txv_contentTitle"
+        android:nextFocusRight="@+id/txt_taskName"
+        android:nextFocusDown="@+id/txt_taskName"
+        android:text="@string/taskName"
+        android:layout_weight="3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textAutoCorrect"
-        android:text="@string/taskTitleLabel"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/taskTitle"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_height="wrap_content" />
 
-    <EditText
+        <EditText
+        android:id="@+id/txt_taskName"
+        android:nextFocusUp="@+id/txv_taskName"
+        android:nextFocusLeft="@+id/txv_taskName"
+        android:nextFocusRight="@+id/txv_taskDescription"
+        android:nextFocusDown="@+id/txv_taskDescription"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:layout_below="@+id/taskTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp"
-        android:id="@+id/taskDescription"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="@string/taskDescriptionLabel"/>
+        android:layout_height="wrap_content" />
 
-    <Button
-        android:text="@string/saveLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/saveTask" />
+</LinearLayout>
+    </TableRow>
 
-    <Button
-        android:text="@string/clearLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/saveTask"
-        android:layout_toEndOf="@+id/saveTask"
-        android:id="@+id/clearContent" />
+    <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grp_taskDescription"
+            android:orientation="horizontal">
 
-    <Button
-        android:text="@string/cancelLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/clearContent"
-        android:layout_toEndOf="@+id/clearContent"
-        android:id="@+id/cancelTask" />
-</RelativeLayout>
+            <TextView
+                android:id="@+id/txv_taskDescription"
+                android:nextFocusUp="@+id/txt_taskName"
+                android:nextFocusLeft="@+id/txt_taskName"
+                android:nextFocusRight="@+id/txt_taskDescription"
+                android:nextFocusDown="@+id/txt_taskDescription"
+                android:text="@string/taskDescription"
+                android:layout_weight="3"
+    android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/txt_taskDescription"
+                android:nextFocusUp="@+id/txv_taskDescription"
+                android:nextFocusLeft="@+id/txv_taskDescription"
+                android:nextFocusRight="@+id/txv_taskDateAndTime"
+                android:nextFocusDown="@+id/txv_taskDateAndTime"
+                android:layout_weight="1"
+                    android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow>
+    <TextView
+        android:id="@+id/txv_taskDateAndTime"
+        android:nextFocusUp="@+id/txt_taskDescription"
+        android:nextFocusLeft="@+id/txt_taskDescription"
+        android:nextFocusRight="@+id/txt_taskDate"
+        android:nextFocusDown="@+id/txt_taskDate"
+        android:text="@string/taskDateAndTime"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    </TableRow>
+
+        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grp_taskDateAndTime"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txt_taskDate"
+                android:nextFocusUp="@+id/txv_taskDateAndTime"
+                android:nextFocusLeft="@+id/txv_taskDateAndTime"
+                android:nextFocusRight="@+id/btn_taskDate"
+                android:nextFocusDown="@+id/btn_taskDate"
+                                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_taskDate"
+                android:nextFocusUp="@+id/txt_taskDate"
+                android:nextFocusLeft="@+id/txt_taskDate"
+                android:nextFocusRight="@+id/txt_taskTime"
+                android:nextFocusDown="@+id/txt_taskTime"
+                android:text="@string/taskChangeDate"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/txt_taskTime"
+                android:nextFocusUp="@+id/btn_taskDate"
+                android:nextFocusLeft="@+id/btn_taskDate"
+                android:nextFocusRight="@+id/btn_taskTime"
+                android:nextFocusDown="@+id/btn_taskTime"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_taskTime"
+                android:nextFocusUp="@+id/txt_taskTime"
+                android:nextFocusLeft="@+id/txt_taskTime"
+                android:nextFocusRight="@+id/txv_taskCompleted"
+                android:nextFocusDown="@+id/txv_taskCompleted"
+                android:text="@string/taskChangeTime"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grp_taskCompleted"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txv_taskCompleted"
+                android:nextFocusUp="@+id/btn_taskTime"
+                android:nextFocusLeft="@+id/btn_taskTime"
+                android:nextFocusRight="@+id/tgl_taskCompleted"
+                android:nextFocusDown="@+id/tgl_taskCompleted"
+                android:text="@string/taskCompleted"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ToggleButton
+                android:id="@+id/tgl_taskCompleted"
+                android:nextFocusUp="@+id/txv_taskCompleted"
+                android:nextFocusLeft="@+id/txv_taskCompleted"
+                android:nextFocusRight="@+id/btn_taskSave"
+                android:nextFocusDown="@+id/btn_taskSave"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grp_taskButtons"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_taskSave"
+                android:nextFocusUp="@+id/tgl_taskCompleted"
+                android:nextFocusLeft="@+id/tgl_taskCompleted"
+                android:nextFocusRight="@+id/btn_taskClear"
+                android:nextFocusDown="@+id/btn_taskClear"
+                android:text="@string/taskSave"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_taskClear"
+                android:nextFocusUp="@+id/btn_taskSave"
+                android:nextFocusLeft="@+id/btn_taskSave"
+                android:nextFocusRight="@+id/btn_taskCancel"
+                android:nextFocusDown="@+id/btn_taskCancel"
+                android:text="@string/taskClear"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_taskCancel"
+                android:nextFocusUp="@+id/btn_taskClear"
+                android:nextFocusLeft="@+id/btn_taskClear"
+                android:nextFocusRight="@+id/txv_contentTitle"
+                android:nextFocusDown="@+id/txv_contentTitle"
+                android:text="@string/taskCancel"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </TableRow>
+
+</TableLayout>
