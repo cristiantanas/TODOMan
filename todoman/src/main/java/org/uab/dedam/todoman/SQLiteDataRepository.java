@@ -68,6 +68,10 @@ public class SQLiteDataRepository {
         return result;
     }
 
+
+
+
+
     public void release() {
 
         if ( sqliteDatabase != null ) {
