@@ -1,14 +1,10 @@
 package org.uab.dedam.todoman;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,11 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -28,6 +21,7 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
 
     private DbAdapter sqliteDatabase;
 
+    private static final String SAVE_AND_GO="org.uab.dedam.todoman.BROADCAST_ACTION";
 
     EditText taskTitle;
     EditText taskDescription;
@@ -97,7 +91,13 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerFrag
                     Date alarmDate=stringToDate(dateString);
                     long alarmMillis=alarmDate.getTime();
 
-                    Intent intent = new Intent(NewTaskActivity.this,TimerAlarm.class);
+                    Intent intent = new Intent(SAVE_AND_GO);
+
+                    intent.putExtra("title",title);
+                    intent.putExtra("description",description);
+                    intent.putExtra("done",done);
+
+
                     PendingIntent pendingIntent =
                             PendingIntent.getBroadcast(getApplicationContext(),234324243, intent, 0);
 

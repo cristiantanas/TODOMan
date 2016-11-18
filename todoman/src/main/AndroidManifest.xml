@@ -20,7 +20,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewTaskActivity"></activity>
-        <receiver android:name="TimerAlarm"></receiver>
+        <receiver android:name=".TimerAlarmBroadcastReceiver">
+            <intent-filter>
+                <action android:name="org.uab.dedam.todoman.BROADCAST_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+
+        </receiver>
     </application>
 
 </manifest>
