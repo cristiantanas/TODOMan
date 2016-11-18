@@ -21,6 +21,7 @@ import java.util.GregorianCalendar;
 public class TaskPresenter  {
     ITaskRepository repositorio;
     Context context;
+    final static String TASK_NOTIFICATION_ACTION = "org.uab.dedam.todoman.TASK_NOTIFY";
 
     public TaskPresenter(Context context){
         this.context = context;
@@ -49,7 +50,7 @@ public class TaskPresenter  {
             Calendar alarmDateTime = new GregorianCalendar(dateTime.getYear(), dateTime.getMonth(), dateTime.getDay());
             alarmDateTime.setTime(dateTime);
 
-            Intent notificationIntent = new Intent(context, TaskTimeBroadcastReceiver.class);
+            Intent notificationIntent = new Intent(TASK_NOTIFICATION_ACTION);
             notificationIntent.putExtra(TaskTimeBroadcastReceiver.NOTIFICATION_ID, idTask);
             notificationIntent.putExtra(TaskTimeBroadcastReceiver.NOTIFICATION, notification);
             notificationIntent.putExtra(TaskTimeBroadcastReceiver.TASK_ID, idTask);
