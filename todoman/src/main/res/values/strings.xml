@@ -6,4 +6,17 @@
     <string name="clearLabel">Clear</string>
     <string name="cancelLabel">Cancel</string>
     <string name="newTaskLabel">New task</string>
+    <string name="label_title">TITLE</string>
+    <string name="label_description">DESCRIPTION</string>
+    <string name="done">DONE (if checked)</string>
+    <string name="endDate">No Date</string>
+    <string name="set">SET</string>
+    <string name="save">SAVE</string>
+    <string name="clear">CLEAR</string>
+    <string name="cancel">CANCEL</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="endHour">No Hour</string>
+    <string name="setHour">SET</string>
 </resources>
